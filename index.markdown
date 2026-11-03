@@ -19,28 +19,13 @@ image: /assets/me.jpg
   </figure>
 </section>
 
-{% assign projects = site.work | sort: 'order' %}
 <section class="section work-section" id="work" aria-labelledby="work-title">
   <div class="wrap">
     <div class="section-heading">
-      <div><p class="eyebrow">01 <span class="eyebrow-slash">/</span> Selected projects</p><h2 id="work-title">Projects</h2></div>
+      <div><p class="eyebrow">01 <span class="eyebrow-slash">/</span> Software</p><h2 id="work-title">Projects</h2></div>
     </div>
     <div class="work-grid">
-      {% for project in projects %}
-      <a class="work-card" href="{{ project.url | relative_url }}">
-        <div class="work-card-heading">
-          <span class="work-card-index">{{ forloop.index | prepend: '0' }}</span>
-          <div>
-            <p class="work-kicker">{{ project.category }}{% if project.year %}<span> · </span>{{ project.year }}{% endif %}</p>
-            <h3>{{ project.title }}</h3>
-          </div>
-          <span class="work-arrow" aria-hidden="true">↗</span>
-        </div>
-        {% if project.image %}<img class="work-thumbnail" src="{{ project.image | relative_url }}" alt="{{ project.image_alt | default: project.title | escape }}" loading="lazy" decoding="async">{% endif %}
-        <p class="work-description">{{ project.description }}</p>
-      </a>
-      {% endfor %}
-      {% if projects.size == 0 %}<p class="empty-note">Nothing here just yet. I’m putting a few things together.</p>{% endif %}
+      <p class="empty-note">I’m getting a few projects ready to share here. Check back soon.</p>
     </div>
   </div>
 </section>
