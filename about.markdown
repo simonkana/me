@@ -1,13 +1,13 @@
 ---
 layout: page
-title: A curious kind of practice.
+title: About
 permalink: /about/
+image: /assets/me.jpg
+image_alt: Šimon sitting outdoors at sunset with a backpack
 ---
 
-I’m Šimon, a software engineer based in Prague. I care about making digital things feel clear, useful, and considered — from the first sketch through the last small detail.
+I’m Šimon, a software engineer based in Prague.
 
-Away from the screen, I’m usually carrying a camera, finding a new climbing route, or listening closely to something. Those interests keep me curious about light, rhythm, movement, and the stories a place can hold.
+I’m also interested in photography and video, and spend some of my free time climbing or listening to music. This site is where I’ll collect a few projects and notes as I go.
 
-This site is a small home for the work and the things I learn while making it. It’s intentionally a work in progress — the best parts should come from what I do next.
-
-If you’re working on something thoughtful, [I’d love to hear about it](mailto:{{ site.email }}).
+You can reach me at [{{ site.email }}](mailto:{{ site.email }}).

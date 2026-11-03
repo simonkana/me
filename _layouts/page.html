@@ -2,7 +2,9 @@
 layout: default
 ---
 <section class="wrap prose-page">
-  <p class="eyebrow">A little about me</p>
   <h1 class="page-title">{{ page.title }}</h1>
-  <div class="prose">{{ content }}</div>
+  <div class="page-body{% if page.image %} page-body-with-image{% endif %}">
+    <div class="prose">{{ content }}</div>
+    {% if page.image %}<img class="about-image" src="{{ page.image | relative_url }}" alt="{{ page.image_alt | escape }}">{% endif %}
+  </div>
 </section>

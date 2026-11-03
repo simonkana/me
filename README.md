@@ -13,11 +13,13 @@ Jekyll watches content and style files while the server runs. Restart it after c
 
 ## Edit your site
 
-- **Your name, intro, location, availability, and social links:** `_data/profile.yml`
+- **Your name, intro, location, and social links:** `_data/profile.yml`
+- **Portrait photo:** replace `assets/me.jpg`; update its alt text in `index.markdown` and `about.markdown` if needed.
+- **Color theme:** follows the visitor’s system setting by default; the moon/sun button switches themes and remembers the choice in that browser.
 - **Navigation:** `_data/navigation.yml`
 - **Homepage copy and sections:** `index.markdown`
 - **About page:** `about.markdown`
-- **Work items:** add Markdown files inside `_work/`. Include front matter fields `title`, `description`, `category`, `year`, `order`, `visual`, and `mark`. Use `visual: one`, `two`, or `three` for the built-in color treatments. Add `image` and `image_alt` to show a project image. Put image files in `assets/images/`.
+- **Work items:** add Markdown files inside `_work/`. Include front matter fields `title`, `description`, and `category`; `year`, `order`, `image`, and `image_alt` are optional. Put image files in `assets/images/`.
 - **Journal posts:** add a file named `YYYY-MM-DD-your-title.markdown` inside `_posts/`, then add front matter with `title`, `date`, and an optional `excerpt`.
 - **Colors, typography, spacing, and responsive layout:** `assets/css/main.css`
 - **Page structure:** `_layouts/`
@@ -28,11 +30,11 @@ Work front matter example:
 ---
 title: "A project name"
 description: "A short, clear sentence about the work."
-category: Web · Independent
+category: Web
 year: 2026
 order: 1
-visual: one
-mark: "A mark"
+image: /assets/images/project-name.jpg
+image_alt: "A description of the project image"
 ---
 
 Write the project story here in Markdown.
