@@ -1,0 +1,33 @@
+title: "Šimon Káňa — Engineer & Creator"
+email: "simon.kana@seznam.cz"
+description: "Software engineer and visual storyteller making thoughtful things for the web and the world. Based in Prague."
+baseurl: ""
+url: "https://simonkana.github.io"
+author: "Šimon Káňa"
+lang: en
+timezone: Europe/Prague
+permalink: /journal/:year/:month/:day/:title/
+markdown: kramdown
+
+collections:
+  work:
+    output: true
+    permalink: /work/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: work
+    values:
+      layout: project
+
+plugins:
+  - jekyll-feed
+
+header_pages:
+  - about.markdown
