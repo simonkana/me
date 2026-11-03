@@ -1,9 +1,9 @@
 ---
-title: "A first note"
+title: "A first hello"
 date: 2026-11-03 19:35:43 +0100
-excerpt: "A short introduction to this little corner of the internet."
+excerpt: "A first note about software, music, climbing, and learning to photograph."
 ---
 
-I made this site to keep a few things together: software projects, photographs and video, and occasional notes.
+Hi, I’m starting this site as a home for my software work, notes, guitar playing, singing, and climbing. I’ve also begun exploring photography and filmmaking with my iPhone 11 and the Blackmagic Camera app; the gallery holds a few photos I’ve made so far.
 
-I’ll add to it as I go.
+Thanks for stopping by.

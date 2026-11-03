@@ -1,13 +1,23 @@
-title: "Šimon Káňa — Engineer & Creator"
+title: "Šimon Káňa"
+tagline: "Software, songs, climbing, and first steps in photography."
 email: "simon.kana@seznam.cz"
-description: "Personal site of Šimon Káňa, a software engineer in Prague."
+description: "Šimon Káňa is a freelance software engineer in Prague who plays guitar, sings, and climbs. He is beginning to explore photography and filmmaking with an iPhone 11."
 baseurl: ""
 url: "https://simonkana.github.io"
-author: "Šimon Káňa"
+author:
+  name: "Šimon Káňa"
+  email: "simon.kana@seznam.cz"
 lang: en
+locale: en_US
 timezone: Europe/Prague
 permalink: /journal/:year/:month/:day/:title/
 markdown: kramdown
+
+social:
+  name: "Šimon Káňa"
+  links:
+    - https://github.com/simonkana
+    - https://www.youtube.com/@simon-kana
 
 collections:
   work:
@@ -20,6 +30,7 @@ defaults:
       type: posts
     values:
       layout: post
+      image: /assets/me.jpg
   - scope:
       path: ""
       type: work
@@ -28,6 +39,7 @@ defaults:
 
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
 
 header_pages:
   - about.markdown

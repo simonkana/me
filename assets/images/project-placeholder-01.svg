@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title">
+  <title id="title">Warm-toned product dashboard illustration placeholder</title>
+  <rect width="1200" height="700" fill="#ead8bc"/>
+  <rect x="88" y="72" width="1024" height="556" rx="10" fill="#fffaf0" stroke="#26374b" stroke-width="3"/>
+  <path d="M98 82h1004v48H98z" fill="#26374b"/>
+  <circle cx="126" cy="106" r="6" fill="#f09477"/><circle cx="148" cy="106" r="6" fill="#e5bd5c"/><circle cx="170" cy="106" r="6" fill="#a2b19a"/>
+  <rect x="128" y="168" width="214" height="420" rx="5" fill="#f2e8d7"/>
+  <rect x="160" y="200" width="112" height="13" rx="6" fill="#26374b"/>
+  <rect x="160" y="247" width="145" height="8" rx="4" fill="#b9aa90"/><rect x="160" y="278" width="118" height="8" rx="4" fill="#b9aa90"/><rect x="160" y="309" width="136" height="8" rx="4" fill="#b9aa90"/>
+  <rect x="382" y="168" width="304" height="112" rx="5" fill="#f4e4ca"/><rect x="712" y="168" width="348" height="112" rx="5" fill="#e8efdf"/>
+  <rect x="414" y="194" width="106" height="8" rx="4" fill="#8b806d"/><rect x="414" y="220" width="172" height="20" rx="4" fill="#26374b"/>
+  <rect x="744" y="194" width="115" height="8" rx="4" fill="#73826e"/><rect x="744" y="220" width="184" height="20" rx="4" fill="#58745f"/>
+  <rect x="382" y="302" width="678" height="286" rx="5" fill="#fbf7ee" stroke="#d6c9b2" stroke-width="2"/>
+  <path d="M430 520c60-10 75-80 130-64s74 33 127-27 83-12 126-59 88-18 147-72" fill="none" stroke="#bd493d" stroke-width="9" stroke-linecap="round"/>
+  <path d="M430 544h565M430 478h565M430 412h565M430 346h565" stroke="#e4dac8" stroke-width="2"/>
+  <text x="88" y="674" fill="#26374b" font-family="monospace" font-size="19" letter-spacing="3">PROJECT IMAGE · REPLACE WITH YOUR WORK</text>
+</svg>

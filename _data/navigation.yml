@@ -1,6 +1,10 @@
 - label: Work
   url: /#work
-- label: Journal
+- label: Photographs
+  url: /photographs/
+- label: Notebook
   url: /#journal
 - label: About
   url: /about/
+- label: CV
+  url: /cv/

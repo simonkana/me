@@ -8,7 +8,7 @@ if (themeButton) {
     themeButton.setAttribute("aria-pressed", String(isDark));
     themeButton.title = isDark ? "Switch to light mode" : "Switch to dark mode";
     themeButton.classList.toggle("is-dark", isDark);
-    if (themeMeta) themeMeta.content = isDark ? "#1e211d" : "#f5f3ed";
+    if (themeMeta) themeMeta.content = isDark ? "#202b37" : "#faf3e5";
   };
 
   const hasSavedTheme = themeRoot.dataset.theme === "dark" || themeRoot.dataset.theme === "light";

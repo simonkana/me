@@ -1,0 +1,33 @@
+---
+layout: default
+---
+<section class="cv-page wrap">
+  <div class="cv-toolbar">
+    <a class="cv-back" href="{{ '/' | relative_url }}">← Back to the website</a>
+    <button class="cv-print" type="button" data-print-cv>Print / save as PDF <span aria-hidden="true">↓</span></button>
+  </div>
+
+  <article class="cv-paper" aria-labelledby="cv-name">
+    <header class="cv-header">
+      <div class="cv-heading-copy">
+        <p class="cv-eyebrow">Curriculum vitae <span>·</span> {{ site.data.profile.location }}</p>
+        <h1 id="cv-name">{{ site.data.profile.name }}</h1>
+        <p class="cv-role">{{ site.data.profile.role }}</p>
+        <div class="cv-contact">
+          <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+          <a href="{{ site.data.profile.github_url }}">GitHub</a>
+          {% if site.data.profile.youtube_url and site.data.profile.youtube_url != "" %}<a href="{{ site.data.profile.youtube_url }}">YouTube</a>{% endif %}
+        </div>
+      </div>
+      <img class="cv-photo" src="{{ '/assets/me.jpg' | relative_url }}" alt="Portrait of {{ site.data.profile.name }}">
+    </header>
+
+    <div class="cv-content">{{ content }}</div>
+
+    <footer class="cv-footer">
+      <span>{{ site.data.profile.name }} · {{ site.data.profile.location }}</span>
+      <a href="{{ '/' | relative_url }}">{{ site.url | remove: 'https://' | remove: 'http://' }}</a>
+    </footer>
+  </article>
+</section>
+<script src="{{ '/assets/js/cv-print.js' | relative_url }}" defer></script>

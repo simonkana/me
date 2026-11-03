@@ -1,6 +1,6 @@
-# Personal site
+# Šimon Káňa — Personal site
 
-A small Jekyll site for a portfolio and journal. The pages use plain Liquid, Markdown, semantic HTML, and one custom stylesheet. There is no database or admin service to maintain: edit the files, commit, and push.
+A simple Jekyll site for a portfolio and notebook. Warm paper colors, brighter accents, clear typography, and a few playful details give it a personal feel. The pages use plain Liquid, Markdown, semantic HTML, and one custom stylesheet. There is no database or admin service to maintain: edit the files, commit, and push.
 
 ## Preview locally
 
@@ -13,13 +13,17 @@ Jekyll watches content and style files while the server runs. Restart it after c
 
 ## Edit your site
 
-- **Your name, intro, location, and social links:** `_data/profile.yml`
+- **Your name, role, intro, location, and social links:** `_data/profile.yml`
+- **Email address and site-wide SEO text:** `_config.yml`. GitHub and YouTube links live in `_data/profile.yml`.
 - **Portrait photo:** replace `assets/me.jpg`; update its alt text in `index.markdown` and `about.markdown` if needed.
 - **Color theme:** follows the visitor’s system setting by default; the moon/sun button switches themes and remembers the choice in that browser.
 - **Navigation:** `_data/navigation.yml`
 - **Homepage copy and sections:** `index.markdown`
+- **Photograph gallery:** your originals live in `assets/photos/`; ordered titles and alt text are in `_data/photographs.yml`. Add each image there with its path, caption, descriptive `alt`, and pixel dimensions.
 - **About page:** `about.markdown`
+- **CV page:** edit `cv.markdown`; projects added under `_work/` appear there automatically. On `/cv/`, use **Print / save as PDF** and choose “Save as PDF” in the browser print dialog.
 - **Work items:** add Markdown files inside `_work/`. Include front matter fields `title`, `description`, and `category`; `year`, `order`, `image`, and `image_alt` are optional. Put image files in `assets/images/`.
+- **Project starters:** three editable examples live in `_work/`; replace their sample copy and placeholder artwork. Remove `template: true` when a project is ready to appear on your CV, or delete a starter you do not need.
 - **Journal posts:** add a file named `YYYY-MM-DD-your-title.markdown` inside `_posts/`, then add front matter with `title`, `date`, and an optional `excerpt`.
 - **Colors, typography, spacing, and responsive layout:** `assets/css/main.css`
 - **Page structure:** `_layouts/`
@@ -42,12 +46,13 @@ Write the project story here in Markdown.
 
 ## Publish with GitHub Pages
 
-This project currently uses Jekyll 4.4 directly. GitHub Pages' built-in builder supports a specific dependency set, so choose one of these before publishing:
+The workflow in `.github/workflows/pages.yml` builds this Jekyll 4.4 site and deploys it through GitHub Actions when you push to `main`. It also builds pull requests so a broken Jekyll build is caught before merging.
 
-- **Simple GitHub Pages build:** switch the Gemfile to the `github-pages` gem as described in [GitHub's Jekyll setup guide](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll), and use only plugins supported by GitHub Pages. Then enable Pages in the repository settings and deploy from your chosen branch.
-- **Keep Jekyll 4.4 and this setup:** use GitHub Actions to build the site and deploy the generated `_site` directory. This avoids GitHub's older built-in Jekyll dependency set.
+1. Push the repository to GitHub.
+2. In the repository, open **Settings → Pages** and set the publishing source to **GitHub Actions**.
+3. Push to `main` or run **Build and deploy site** from the Actions tab on `main`. The workflow publishes the generated site and reports its URL.
 
-Set `url` and `baseurl` in `_config.yml` to match the eventual domain and repository path. For a user site such as `simonkana.github.io`, `baseurl` is empty. For a project site, it is usually `/<repository-name>`.
+The site is currently configured for `https://simonkana.github.io` with an empty `baseurl`, which is correct when the repository is named `simonkana.github.io`. The workflow reads the Pages base path when it builds, so project repositories work too. Keep `url` set to the site’s origin; for local previews of a project site, set `baseurl` to `/<repository-name>`. If you use a custom domain, update `url` and configure that domain in the Pages settings.
 
 ## Content editing options
 
