@@ -3,7 +3,7 @@ layout: page
 title: About
 description: "Meet Šimon Káňa, a freelance software engineer in Prague who plays guitar, sings, and climbs, and is beginning to explore photography and filmmaking."
 permalink: /about/
-image: /assets/me.jpg
+image: /assets/me.webp
 image_alt: Šimon sitting outdoors at sunset with a backpack
 ---
 

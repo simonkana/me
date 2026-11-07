@@ -3,7 +3,7 @@ layout: cv
 title: "CV — Šimon Káňa"
 browser_title: "CV — Software Engineer"
 description: "Full-stack software engineer in Prague with experience in JavaScript, TypeScript, React, Next.js, Java and Spring Boot."
-image: /assets/me.jpg
+image: /assets/me.webp
 lang: en
 cv_lang: en
 cv_location: "Prague, Czech Republic"

@@ -3,7 +3,7 @@ layout: cv
 title: "Životopis — Šimon Káňa"
 browser_title: "Životopis — Softwarový inženýr"
 description: "Full-stack vývojář a softwarový inženýr z Prahy se zkušenostmi s JavaScriptem, TypeScriptem, Reactem, Next.js, Javou a Spring Bootem."
-image: /assets/me.jpg
+image: /assets/me.webp
 lang: cs
 cv_lang: cs
 cv_location: "Praha, Česká republika"

@@ -3,8 +3,9 @@ layout: home
 title: "I build software. I play music and climb."
 browser_title: "I build software. I play music and climb."
 description: "Freelance software engineer in Prague; guitar, singing, climbing, and first experiments with iPhone photography and filmmaking."
-image: /assets/me.jpg
+image: /assets/me.webp
 ---
+
 <section class="hero wrap" aria-labelledby="intro-title">
   <div class="hero-copy">
     <h1 id="intro-title">I build software.<br><em>I play music &amp; climb.</em></h1>
@@ -15,7 +16,7 @@ image: /assets/me.jpg
     </div>
   </div>
   <figure class="hero-photo">
-    <img src="{{ '/assets/me.jpg' | relative_url }}" alt="Šimon sitting outdoors at sunset with a backpack" fetchpriority="high">
+    <img src="{{ '/assets/me.webp' | relative_url }}" alt="Šimon sitting outdoors at sunset with a backpack" fetchpriority="high">
   </figure>
 </section>
 

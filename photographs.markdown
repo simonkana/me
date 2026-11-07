@@ -2,7 +2,7 @@
 layout: gallery
 title: Observations
 description: "A first collection of phone photographs by Šimon Káňa, made while beginning to explore photography and light."
-image: /assets/photos/01-under-an-autumn-sky.jpg
+image: /assets/photos/01-under-an-autumn-sky.webp
 permalink: /photographs/
 ---
 

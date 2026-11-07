@@ -30,7 +30,7 @@ defaults:
       type: posts
     values:
       layout: post
-      image: /assets/me.jpg
+      image: /assets/me.webp
   - scope:
       path: ""
       type: work

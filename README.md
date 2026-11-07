@@ -15,7 +15,7 @@ Jekyll watches content and style files while the server runs. Restart it after c
 
 - **Your name, role, intro, location, and social links:** `_data/profile.yml`
 - **Email address and site-wide SEO text:** `_config.yml`. GitHub and YouTube links live in `_data/profile.yml`.
-- **Portrait photo:** replace `assets/me.jpg`; update its alt text in `index.markdown` and `about.markdown` if needed.
+- **Portrait photo:** replace `assets/me.webp`; update its alt text in `index.markdown` and `about.markdown` if needed.
 - **Color theme:** follows the visitor’s system setting by default; the moon/sun button switches themes and remembers the choice in that browser.
 - **Navigation:** `_data/navigation.yml`
 - **Homepage copy and sections:** `index.markdown`
@@ -40,7 +40,6 @@ order: 1
 image: /assets/images/project-name.jpg
 image_alt: "A description of the project image"
 ---
-
 Write the project story here in Markdown.
 ```
 
