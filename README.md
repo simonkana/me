@@ -19,7 +19,7 @@ Jekyll watches content and style files while the server runs. Restart it after c
 - **Color theme:** follows the visitor’s system setting by default; the moon/sun button switches themes and remembers the choice in that browser.
 - **Navigation:** `_data/navigation.yml`
 - **Homepage copy and sections:** `index.markdown`
-- **Photograph gallery:** your originals live in `assets/photos/`; ordered titles and alt text are in `_data/photographs.yml`. Add each image there with its path, caption, descriptive `alt`, and pixel dimensions.
+- **Photograph gallery:** full-resolution originals live in `assets/photos/`; the site publishes the smaller WebP copies in `assets/photos/optimized/`. Ordered paths, titles, alt text, and displayed pixel dimensions are in `_data/photographs.yml`. When adding a photograph, create an optimized WebP copy and point its entry there; keep the original files in `assets/photos/`.
 - **About page:** `about.markdown`
 - **CV page:** edit `cv.markdown`; projects added under `_work/` appear there automatically. On `/cv/`, use **Print / save as PDF** and choose “Save as PDF” in the browser print dialog.
 - **Work items:** add Markdown files inside `_work/`. Include front matter fields `title`, `description`, and `category`; `year`, `order`, `image`, and `image_alt` are optional. Put image files in `assets/images/`.

@@ -9,14 +9,14 @@ image: /assets/me.webp
 <section class="hero wrap" aria-labelledby="intro-title">
   <div class="hero-copy">
     <h1 id="intro-title">I build software.<br><em>I play music &amp; climb.</em></h1>
-    <p class="hero-intro">{{ site.data.profile.intro }}</p>
+    <p class="hero-intro">{{ site.data.profile.intro | escape }}</p>
     <div class="hero-links">
       <a class="button-link" href="#work">Have a look around <span aria-hidden="true">→</span></a>
       <a class="text-link" href="{{ '/about/' | relative_url }}">A little about me <span aria-hidden="true">↗</span></a>
     </div>
   </div>
   <figure class="hero-photo">
-    <img src="{{ '/assets/me.webp' | relative_url }}" alt="Šimon sitting outdoors at sunset with a backpack" fetchpriority="high">
+    <img src="{{ '/assets/me.webp' | relative_url }}" alt="Šimon sitting outdoors at sunset with a backpack" decoding="async" fetchpriority="high">
   </figure>
 </section>
 
@@ -40,8 +40,8 @@ image: /assets/me.webp
     <div class="photo-grid photo-grid-preview">
       {% for photo in site.data.photographs limit:3 %}
       <a class="photo-card" href="{{ '/photographs/' | relative_url }}" aria-label="View the photograph gallery: {{ photo.title | escape }}">
-        <img src="{{ photo.image | relative_url }}" alt="{{ photo.alt | escape }}"{% if photo.width and photo.height %} width="{{ photo.width }}" height="{{ photo.height }}"{% endif %} loading="lazy" decoding="async">
-        <span class="photo-card-caption"><span class="photo-card-title">{{ photo.title }}</span></span>
+        <img src="{{ photo.image | relative_url | escape }}" alt="{{ photo.alt | escape }}"{% if photo.width and photo.height %} width="{{ photo.width | escape }}" height="{{ photo.height | escape }}"{% endif %} loading="lazy" decoding="async">
+        <span class="photo-card-caption"><span class="photo-card-title">{{ photo.title | escape }}</span></span>
       </a>
       {% endfor %}
     </div>
@@ -56,7 +56,7 @@ image: /assets/me.webp
     </div>
     <div class="journal-list">
       {% for post in site.posts limit:4 %}
-      <a class="journal-row" href="{{ post.url | relative_url }}"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time><span class="journal-title">{{ post.title }}</span><span class="journal-arrow" aria-hidden="true">↗</span></a>
+      <a class="journal-row" href="{{ post.url | relative_url | escape }}"><time datetime="{{ post.date | date_to_xmlschema | escape }}">{{ post.date | date: "%b %-d, %Y" | escape }}</time><span class="journal-title">{{ post.title | escape }}</span><span class="journal-arrow" aria-hidden="true">↗</span></a>
       {% endfor %}
       {% if site.posts.size == 0 %}<p class="empty-note">No notes yet. The notebook can wait.</p>{% endif %}
     </div>
@@ -69,9 +69,9 @@ image: /assets/me.webp
     <div class="contact-row">
       <h2 id="contact-title">Say hello.</h2>
       <div class="contact-links">
-        <a class="button-link button-link-ink" href="mailto:{{ site.email }}">Email me <span aria-hidden="true">↗</span></a>
-        <a class="contact-social" href="{{ site.data.profile.github_url }}">GitHub <span aria-hidden="true">↗</span></a>
-        {% if site.data.profile.youtube_url and site.data.profile.youtube_url != "" %}<a class="contact-social" href="{{ site.data.profile.youtube_url }}">YouTube <span aria-hidden="true">↗</span></a>{% endif %}
+        <a class="button-link button-link-ink" href="mailto:{{ site.email | escape }}">Email me <span aria-hidden="true">↗</span></a>
+        <a class="contact-social" href="{{ site.data.profile.github_url | escape }}">GitHub <span aria-hidden="true">↗</span></a>
+        {% if site.data.profile.youtube_url and site.data.profile.youtube_url != "" %}<a class="contact-social" href="{{ site.data.profile.youtube_url | escape }}">YouTube <span aria-hidden="true">↗</span></a>{% endif %}
       </div>
     </div>
   </div>

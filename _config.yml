@@ -46,3 +46,17 @@ header_pages:
 
 exclude:
   - temp/
+  # Keep full-resolution source photos in the repo; publish only optimized copies.
+  - assets/me.jpg
+  - assets/photos/01-under-an-autumn-sky.jpg
+  - assets/photos/01-under-an-autumn-sky.webp
+  - assets/photos/02-the-everyday-passage.jpg
+  - assets/photos/02-the-everyday-passage.webp
+  - assets/photos/03-the-walk-home.jpg
+  - assets/photos/03-the-walk-home.webp
+  - assets/photos/04-light-through-the-blinds.jpg
+  - assets/photos/04-light-through-the-blinds.webp
+  - assets/photos/05-a-familiar-shape.jpg
+  - assets/photos/05-a-familiar-shape.webp
+  - assets/photos/06-amber-after-dark.jpg
+  - assets/photos/06-amber-after-dark.webp

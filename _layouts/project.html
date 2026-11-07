@@ -4,10 +4,10 @@ layout: default
 <article class="wrap article-page">
   <a class="back-link" href="{{ '/' | relative_url }}#work">← Back to the catalogue</a>
   <header class="article-header">
-    <p class="eyebrow">{{ page.category }}{% if page.year %} · {{ page.year }}{% endif %}</p>
-    <h1 class="page-title">{{ page.title }}</h1>
-    <p class="article-deck">{{ page.description }}</p>
+    <p class="eyebrow">{{ page.category | escape }}{% if page.year %} · {{ page.year | escape }}{% endif %}</p>
+    <h1 class="page-title">{{ page.title | escape }}</h1>
+    <p class="article-deck">{{ page.description | escape }}</p>
   </header>
-  {% if page.image %}<img class="project-image" src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: page.title | escape }}" loading="lazy" decoding="async">{% endif %}
+  {% if page.image %}<img class="project-image" src="{{ page.image | relative_url | escape }}" alt="{{ page.image_alt | default: page.title | escape }}" loading="lazy" decoding="async">{% endif %}
   <div class="prose">{{ content }}</div>
 </article>

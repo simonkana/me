@@ -13,4 +13,4 @@ Photography, videography, editing, cinematography, and short indie filmmaking ar
 
 This site brings together my work, projects, interests, and whatever else I’m thinking about. For a quick professional overview, take a look at [my CV]({{ '/cv/' | relative_url }}).
 
-I’m glad you stopped by. [Send me a note](mailto:{{ site.email }}) if you’d like to say hello.
+I’m glad you stopped by. [Send me a note](mailto:{{ site.email | escape }}) if you’d like to say hello.

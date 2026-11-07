@@ -2,11 +2,11 @@
 layout: default
 ---
 <article class="wrap article-page">
-  <a class="back-link" href="{{ '/' | relative_url }}#journal">← Back to the notebook</a>
+  <a class="back-link" href="{{ '/' | relative_url | escape }}#journal">← Back to the notebook</a>
   <header class="article-header">
-    <p class="eyebrow">Notebook <span class="eyebrow-slash">/</span> {{ page.date | date: "%B %-d, %Y" }}</p>
-    <h1 class="page-title">{{ page.title }}</h1>
-    {% if page.excerpt %}<p class="article-deck">{{ page.excerpt | strip_html }}</p>{% endif %}
+    <p class="eyebrow">Notebook <span class="eyebrow-slash">/</span> {{ page.date | date: "%B %-d, %Y" | escape }}</p>
+    <h1 class="page-title">{{ page.title | escape }}</h1>
+    {% if page.excerpt %}<p class="article-deck">{{ page.excerpt | strip_html | escape }}</p>{% endif %}
   </header>
   <div class="prose">{{ content }}</div>
 </article>

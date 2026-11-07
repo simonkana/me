@@ -14,24 +14,24 @@ layout: default
   <article class="cv-paper" aria-labelledby="cv-name">
     <header class="cv-header">
       <div class="cv-heading-copy">
-        <p class="cv-eyebrow">{% if page.cv_lang == 'cs' %}Životopis{% else %}Curriculum vitae{% endif %} <span>·</span> {{ page.cv_location }}</p>
-        <h1 id="cv-name">{{ site.data.profile.name }}</h1>
-        <p class="cv-role">{{ page.cv_role }}</p>
+        <p class="cv-eyebrow">{% if page.cv_lang == 'cs' %}Životopis{% else %}Curriculum vitae{% endif %} <span>·</span> {{ page.cv_location | escape }}</p>
+        <h1 id="cv-name">{{ site.data.profile.name | escape }}</h1>
+        <p class="cv-role">{{ page.cv_role | escape }}</p>
         <div class="cv-contact">
-          <a href="mailto:{{ site.email }}">{{ site.email }}</a>
-          <a href="{{ site.data.profile.github_url }}">GitHub</a>
-          <a href="{{ site.data.profile.linkedin_url }}">LinkedIn</a>
-          <a href="{{ site.url }}">{% if page.cv_lang == 'cs' %}Portfolio{% else %}Website{% endif %}</a>
+          <a href="mailto:{{ site.email | escape }}">{{ site.email | escape }}</a>
+          <a href="{{ site.data.profile.github_url | escape }}">GitHub</a>
+          <a href="{{ site.data.profile.linkedin_url | escape }}">LinkedIn</a>
+          <a href="{{ site.url | escape }}">{% if page.cv_lang == 'cs' %}Portfolio{% else %}Website{% endif %}</a>
         </div>
       </div>
-      <img class="cv-photo" src="{{ '/assets/me.webp' | relative_url }}" alt="{% if page.cv_lang == 'cs' %}Portrét — {{ site.data.profile.name }}{% else %}Portrait of {{ site.data.profile.name }}{% endif %}">
+      <img class="cv-photo" src="{{ '/assets/me.webp' | relative_url }}" alt="{% if page.cv_lang == 'cs' %}Portrét — {{ site.data.profile.name | escape }}{% else %}Portrait of {{ site.data.profile.name | escape }}{% endif %}" width="800" height="800" decoding="async">
     </header>
 
     <div class="cv-content">{{ content }}</div>
 
     <footer class="cv-footer">
-      <span>{{ site.data.profile.name }} · {{ page.cv_location }}</span>
-      <a href="{{ '/' | relative_url }}">{{ site.url | remove: 'https://' | remove: 'http://' }}</a>
+      <span>{{ site.data.profile.name | escape }} · {{ page.cv_location | escape }}</span>
+      <a href="{{ '/' | relative_url }}">{{ site.url | remove: 'https://' | remove: 'http://' | escape }}</a>
     </footer>
   </article>
 </section>

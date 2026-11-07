@@ -325,6 +325,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-
   gap: clamp(40px, 7vw, 90px);
 }
 .prose { max-width: 640px; color: var(--copy); font-size: 1rem; line-height: 1.85; }
+.prose, .cv-contact a { overflow-wrap: anywhere; }
 .prose p { margin: 0 0 1.35em; }
 .prose a { color: var(--red); text-decoration: underline; text-underline-offset: 3px; }
 .prose h2, .prose h3 { margin-top: 2em; color: var(--ink); font: 400 1.8rem/1.15 var(--serif); }
@@ -429,11 +430,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-
   .nav-list a { font-size: .67rem; }
   .header-contact { display: none; }
   .header-actions { gap: 10px; }
-  .theme-toggle { width: 35px; height: 35px; }
+  .theme-toggle { width: 44px; height: 44px; }
   .menu-toggle { display: none; }
   .menu-enhanced .menu-toggle {
     display: inline-flex;
-    min-height: 40px;
+    min-height: 44px;
     align-items: center;
     gap: 10px;
     padding: 8px 0 8px 10px;
