@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Not found" description="This page doesn’t exist." noindex>
+  <div class="wrap page">
+    <p class="label">404</p>
+    <h1 class="page-title">I couldn’t find that page. It may have moved when I rebuilt the site.</h1>
+    <p class="back"><a class="arrow-link" href="/">← Back to the homepage</a></p>
+  </div>
+</Base>
+
+<style>
+  .label { margin: 0 0 16px; }
+  .page-title { max-width: 18ch; }
+  .back { margin-top: 40px; }
+</style>

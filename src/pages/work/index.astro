@@ -1,0 +1,55 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../lib/site';
+
+// Skip getCollection() while work/ has no Markdown files (it would warn about an empty collection).
+const hasProjects = Object.keys(import.meta.glob('/src/content/work/**/*.md')).length > 0;
+const projects = hasProjects
+  ? (await getCollection('work', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order)
+  : [];
+const rendered = await Promise.all(projects.map(async (p) => ({ p, Content: (await render(p)).Content })));
+---
+<Base title="Work" description="Software projects by Šimon Káňa, a freelance software engineer in Prague.">
+  <div class="wrap page">
+    <header class="page-head">
+      <p class="label">01 / Software</p>
+      <h1 class="page-title">Work</h1>
+    </header>
+
+    {
+      rendered.length === 0 ? (
+        <p class="lede">
+          I’m getting a few projects ready to share here. Meanwhile, have a look at <a href={SITE.links.github}>my GitHub ↗</a>
+        </p>
+      ) : (
+        <ol class="projects">
+          {rendered.map(({ p, Content }) => (
+            <li id={p.id}>
+              <article>
+                <p class="label">
+                  {p.data.category}
+                  {p.data.year && ` · ${p.data.year}`}
+                </p>
+                <h2>{p.data.link ? <a href={p.data.link}>{p.data.title} ↗</a> : p.data.title}</h2>
+                <p class="desc">{p.data.description}</p>
+                <div class="prose">
+                  <Content />
+                </div>
+              </article>
+            </li>
+          ))}
+        </ol>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .projects { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+  .projects li { border-bottom: 1px solid var(--rule); padding: clamp(28px, 4vw, 44px) 0; scroll-margin-top: 24px; }
+  h2 { font-size: var(--fs-index); line-height: 1.1; margin: 10px 0 8px; }
+  h2 a { text-decoration: none; }
+  .desc { margin: 0 0 16px; color: var(--muted); }
+  .lede a { text-decoration-color: var(--accent); }
+</style>

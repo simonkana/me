@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const posts = (await getCollection('notebook', ({ data }) => !data.draft)).sort((a, b) => +b.data.date - +a.data.date);
+const fmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Europe/Prague' });
+---
+<Base title="Notebook" description="Notes and observations by Šimon Káňa: software, music, climbing and learning to photograph.">
+  <div class="wrap page">
+    <header class="page-head">
+      <p class="label">03 / Notes &amp; observations</p>
+      <h1 class="page-title">Notebook</h1>
+    </header>
+    {
+      posts.length === 0 ? (
+        <p class="lede">No notes yet. The notebook can wait.</p>
+      ) : (
+        <ol class="posts">
+          {posts.map((post) => (
+            <li>
+              <a href={`/notebook/${post.id}/`}>
+                <time class="mono muted" datetime={post.data.date.toISOString()}>{fmt.format(post.data.date)}</time>
+                <span class="t">{post.data.title}</span>
+                <span class="arr mono" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      )
+    }
+    <p class="feed"><a class="arrow-link" href="/feed.xml">RSS feed ↗</a></p>
+  </div>
+</Base>
+
+<style>
+  .posts { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+  li { border-bottom: 1px solid var(--rule); }
+  a { display: grid; grid-template-columns: 7.5em 1fr auto; gap: 4px 16px; align-items: baseline; padding: 18px 0; text-decoration: none; transition: transform 0.35s var(--ease); }
+  a:hover { transform: translateX(12px); }
+  time { font-size: var(--fs-label); }
+  .t { font-size: var(--fs-index); line-height: 1.15; }
+  .arr { color: var(--muted); }
+  a:hover .arr { color: var(--accent); }
+  .feed { margin-top: 32px; }
+  .feed a { display: inline; padding: 0; }
+  .feed a:hover { transform: none; }
+  @media (max-width: 560px) { a { grid-template-columns: 1fr auto; } time { grid-column: 1 / -1; } }
+  @media (prefers-reduced-motion: reduce) { a, a:hover { transform: none; } }
+</style>

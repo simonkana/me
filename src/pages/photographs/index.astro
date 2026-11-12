@@ -1,0 +1,62 @@
+---
+import { Picture } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const photos = (await getCollection('photos')).sort((a, b) => a.data.order - b.data.order);
+const sizes = '(min-width: 988px) 860px, calc(100vw - 2 * clamp(16px, 5vw, 64px))';
+const widths = [480, 720, 960, 1280, 1600];
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+<Base
+  title="Observations"
+  description="A first collection of phone photographs by Šimon Káňa, made while beginning to explore photography and light."
+  image="/og/me.webp"
+>
+  <div class="wrap page">
+    <header class="page-head">
+      <p class="label">Photo notebook / {photos.length} frames</p>
+      <h1 class="page-title">Observations</h1>
+      <p class="lede">
+        Fragments of everyday life, light, and the changing seasons. This first collection was photographed on my iPhone 11 using the Blackmagic Camera app. I’m just beginning to learn photography and filmmaking, and these are a few moments I’ve noticed along the way.
+      </p>
+    </header>
+
+    <ol class="photos">
+      {
+        photos.map((photo, i) => (
+          <li id={photo.id}>
+            <figure>
+              <Picture
+                src={photo.data.image}
+                alt={photo.data.alt}
+                formats={['avif', 'webp']}
+                widths={widths.filter((w) => w <= photo.data.image.width)}
+                sizes={sizes}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchpriority={i === 0 ? 'high' : 'auto'}
+                decoding="async"
+                quality={60}
+                fallbackFormat="webp"
+              />
+              <figcaption>
+                <span class="mono muted">{pad(i + 1)}</span>
+                <em>{photo.data.title}</em>
+              </figcaption>
+            </figure>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</Base>
+
+<style>
+  .photos { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(48px, 7vw, 88px); }
+  li { scroll-margin-top: 24px; }
+  figure { margin: 0; }
+  figure :global(img) { width: 100%; height: auto; background: var(--rule); }
+  figcaption { display: flex; align-items: baseline; gap: 14px; margin-top: 14px; font-size: 22px; }
+  figcaption .mono { font-size: var(--fs-label); }
+  li:target figcaption em { color: var(--accent); }
+</style>

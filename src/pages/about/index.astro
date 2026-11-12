@@ -1,0 +1,32 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import me from '../../assets/me.jpg';
+import { SITE, personJsonLd } from '../../lib/site';
+---
+<Base
+  title="About"
+  description="Meet Šimon Káňa, a freelance software engineer in Prague who plays guitar, sings, and climbs, and is beginning to explore photography and filmmaking."
+  type="profile"
+  jsonLd={personJsonLd(Astro.site)}
+>
+  <div class="wrap page">
+    <header class="page-head">
+      <p class="label">04 / A little context</p>
+      <h1 class="page-title">About</h1>
+    </header>
+    <div class="prose">
+      <p>I’m Šimon, a freelance software engineer based in Prague. Outside work, music and climbing are my main pursuits: I play guitar, sing, and climb indoors and outdoors.</p>
+      <p>Photography, videography, editing, cinematography, and short indie filmmaking are new interests I’m only beginning to explore. I don’t own dedicated camera gear yet; for now, I’m learning with my iPhone 11 and the Blackmagic Camera app. The <a href="/photographs/">gallery</a> is a small set of photos I’ve made with that setup, and I’m learning as I go.</p>
+      <p>This site brings together my work, projects, interests, and whatever else I’m thinking about. For a quick professional overview, take a look at <a href="/cv/">my CV</a>.</p>
+      <p>I’m glad you stopped by. <a href={`mailto:${SITE.email}`}>Send me a note</a> if you’d like to say hello.</p>
+    </div>
+    <figure class="portrait">
+      <Picture src={me} alt="Šimon sitting outdoors at sunset with a backpack" formats={['avif', 'webp']} fallbackFormat="webp" widths={[360, 560, 800]} sizes="(min-width: 640px) 360px, 100vw" loading="lazy" decoding="async" />
+    </figure>
+  </div>
+</Base>
+
+<style>
+  .portrait { margin: clamp(40px, 6vw, 72px) 0 0; max-width: 360px; }
+</style>
