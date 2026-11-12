@@ -1,0 +1,40 @@
+/* CV print styles: A4, black on white, two pages. Screen spacing is untouched. */
+@media print {
+  @page { size: A4; margin: 15mm 16mm; }
+  :root { --paper: #fff; --ink: #000; --muted: #444; --rule: #bbb; --accent: #000; }
+  html, body { background: #fff !important; color: #000 !important; font-size: 10.6pt; line-height: 1.38; }
+  body { display: block; min-height: 0; }
+  .site-header, .site-footer, .skip-link, .no-print, [data-toggle] { display: none !important; }
+  .wrap { max-width: none; padding: 0; }
+  .cv-page { padding: 0 !important; }
+
+  .cv .page-title { font-size: 30pt; line-height: 1; }
+  .cv .label { font-size: 7.5pt; margin-bottom: 6pt !important; }
+  .cv .role { font-size: 13pt; margin-top: 5pt; }
+  .cv .contact { margin-top: 8pt; gap: 2pt 14pt; font-size: 8pt; }
+  .cv .contact a { text-decoration: none; color: #000; }
+  .cv .contact a[data-print-url]::after { content: ' ' attr(href); color: #444; }
+  .cv .contact a[data-print-url^='l']::after { content: ' ' attr(data-print-url); }
+  .cv .portrait { width: 30mm !important; filter: grayscale(1); }
+
+  .cv-section { margin-top: 14pt !important; max-width: none !important; }
+  .cv-section h2 { font-size: 7.5pt !important; color: #000 !important; padding-bottom: 3pt !important; margin-bottom: 7pt !important; break-after: avoid; }
+  .cv-section p { margin-bottom: 4pt !important; }
+  .entry { break-inside: avoid; }
+  .entry + .entry { margin-top: 10pt !important; }
+  .entry-head h3 { font-size: 14pt !important; }
+  .entry-head .mono { font-size: 8pt !important; color: #000 !important; }
+  .org { margin: 0 0 4pt !important; }
+  .cv-section li + li { margin-top: 1pt !important; }
+
+  .side { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10mm; break-before: auto; }
+  .skills-section { grid-column: 1 / -1; break-inside: avoid; }
+  .side .cv-section { break-inside: avoid; }
+  .skills { gap: 3pt !important; }
+  .skills div { grid-template-columns: 38mm 1fr !important; }
+  .skills dt { font-size: 7.5pt !important; color: #000 !important; }
+
+  .cv-foot { display: flex !important; justify-content: space-between; margin-top: 16pt; padding-top: 6pt; border-top: 1px solid #bbb; font-size: 7.5pt; color: #444 !important; }
+  .cv-foot a { color: #444; text-decoration: none; }
+  a { color: #000; }
+}

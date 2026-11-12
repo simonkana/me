@@ -1,0 +1,167 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { existsSync } from 'node:fs';
+import Base from './Base.astro';
+import me from '../assets/me.jpg';
+import { SITE, abs, host } from '../lib/site';
+import '../styles/print.css';
+
+interface Props {
+  cv: CollectionEntry<'cv'>['data'];
+}
+const { cv } = Astro.props;
+const L = cv.labels;
+const code = cv.lang === 'cs' ? 'cz' : 'en';
+const pdf = `/cv/simon-kana-cv-${code}.pdf`;
+const hasPdf = existsSync(`public${pdf}`);
+const siteUrl = abs('/', Astro.site);
+---
+<Base title={cv.title} description={cv.description} lang={cv.lang} image="/og/me.webp" type="profile">
+  <div class="wrap cv-page">
+    <div class="toolbar mono no-print">
+      <a class="muted back" href="/">{L.back}</a>
+      <div class="actions">
+        <nav aria-label={L.languageNav}>
+          <a href="/cv/" hreflang="en" lang="en" aria-current={cv.lang === 'en' ? 'page' : undefined}>EN</a>
+          <span class="muted" aria-hidden="true">|</span>
+          <a href="/cv/cz/" hreflang="cs" lang="cs" aria-current={cv.lang === 'cs' ? 'page' : undefined}>CZ</a>
+        </nav>
+        <button type="button" data-print>{L.print}</button>
+        {hasPdf && (
+          <a class="pdf" href={pdf} download data-umami-event="cv-download" data-umami-event-lang={code}>
+            {L.download} ↓
+          </a>
+        )}
+      </div>
+    </div>
+
+    <article class="cv" aria-labelledby="cv-name">
+      <header class="cv-head">
+        <div>
+          <p class="label">{L.eyebrow} · {cv.location}</p>
+          <h1 id="cv-name" class="page-title">{SITE.name}</h1>
+          <p class="role">{cv.role}</p>
+          <ul class="contact mono">
+            <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+            <li><a href={SITE.links.github} data-print-url>GitHub</a></li>
+            <li><a href={SITE.links.linkedin} data-print-url="linkedin.com/in/šimon-káňa">LinkedIn</a></li>
+            <li><a href={siteUrl} data-print-url>{L.website}</a></li>
+          </ul>
+        </div>
+        <Image class="portrait" src={me} alt={L.portraitAlt} width={240} height={240} densities={[1, 2]} loading="eager" />
+      </header>
+
+      <section class="cv-section">
+        <h2>{L.profile}</h2>
+        {cv.profile.map((p) => <p>{p}</p>)}
+      </section>
+
+      <section class="cv-section">
+        <h2>{L.experience}</h2>
+        {cv.experience.map((job) => (
+          <div class="entry">
+            <div class="entry-head">
+              <h3>{job.role}</h3>
+              <span class="mono muted">{job.period}</span>
+            </div>
+            <p class="org">{job.org}</p>
+            <ul>{job.points.map((pt) => <li>{pt}</li>)}</ul>
+          </div>
+        ))}
+      </section>
+
+      <section class="cv-section">
+        <h2>{L.education}</h2>
+        {cv.education.map((ed) => (
+          <div class="entry">
+            <div class="entry-head">
+              <h3>{ed.school}</h3>
+              <span class="mono muted">{ed.period}</span>
+            </div>
+            <p class="org">{ed.place}</p>
+            <p>{ed.details}</p>
+          </div>
+        ))}
+      </section>
+
+      <div class="side">
+        <section class="cv-section skills-section">
+          <h2>{L.skills}</h2>
+          <dl class="skills">
+            {cv.skills.map((s) => (
+              <div>
+                <dt class="mono">{s.label}</dt>
+                <dd>{s.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+        <section class="cv-section">
+          <h2>{L.languages}</h2>
+          <ul>{cv.languages.map((l) => <li>{l}</li>)}</ul>
+        </section>
+        <section class="cv-section">
+          <h2>{L.personalSkills}</h2>
+          <p>{cv.personalSkills}</p>
+        </section>
+        <section class="cv-section">
+          <h2>{L.interests}</h2>
+          <ul>{cv.interests.map((i) => <li>{i}</li>)}</ul>
+        </section>
+      </div>
+
+      <footer class="cv-foot mono muted">
+        <span>{SITE.name} · {cv.location}</span>
+        <a href={siteUrl}>{host(Astro.site)}</a>
+      </footer>
+    </article>
+  </div>
+</Base>
+
+<script>
+  document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
+</script>
+
+<style>
+  .cv-page { padding-top: clamp(28px, 5vw, 56px); padding-bottom: var(--rhythm); }
+  .toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 20px; margin-bottom: clamp(32px, 5vw, 56px); }
+  .back { text-decoration: none; }
+  .back:hover { color: var(--ink); }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; }
+  .actions nav { display: flex; gap: 8px; }
+  .actions nav a { text-decoration: none; color: var(--muted); padding: 4px 2px; }
+  .actions nav a[aria-current='page'] { color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); }
+  button, .pdf {
+    font: inherit; color: var(--ink); background: transparent; cursor: pointer;
+    border: 1px solid var(--ink); border-radius: 999px; padding: 7px 14px; text-decoration: none; line-height: 1.2;
+  }
+  button:hover, .pdf:hover { background: var(--ink); color: var(--paper); }
+
+  .cv-head { display: flex; justify-content: space-between; gap: 24px 40px; align-items: flex-start; }
+  .cv-head .label { margin: 0 0 14px; }
+  .role { margin: 14px 0 0; font-style: italic; font-size: clamp(22px, 2vw + 12px, 28px); line-height: 1.25; }
+  .contact { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+  .contact a { text-decoration-color: var(--accent); }
+  .portrait { width: clamp(96px, 18vw, 150px); height: auto; aspect-ratio: 1; object-fit: cover; flex: none; border-radius: 2px; }
+
+  .cv-section { margin-top: clamp(40px, 6vw, 64px); max-width: 65ch; }
+  .cv-section h2 { font-family: var(--mono); font-size: var(--fs-label); text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); padding-bottom: 10px; border-bottom: 1px solid var(--rule); margin-bottom: 18px; }
+  .cv-section p { margin: 0 0 0.8em; }
+  .cv-section ul { margin: 0; padding-left: 1.1em; }
+  .cv-section li + li { margin-top: 0.25em; }
+  .entry + .entry { margin-top: 32px; }
+  .entry-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px; }
+  .entry-head h3 { font-size: clamp(24px, 2.4vw, 30px); line-height: 1.15; }
+  .entry-head .mono { font-size: var(--fs-label); }
+  .org { color: var(--muted); font-style: italic; margin: 2px 0 10px !important; }
+  .skills { margin: 0; display: grid; gap: 12px; }
+  .skills div { display: grid; grid-template-columns: 11rem 1fr; gap: 4px 16px; align-items: baseline; }
+  .skills dt { font-size: var(--fs-label); color: var(--muted); }
+  .skills dd { margin: 0; }
+  @media (max-width: 560px) {
+    .cv-head { flex-direction: column-reverse; }
+    .skills div { grid-template-columns: 1fr; }
+  }
+  .cv-foot { display: none; }
+</style>

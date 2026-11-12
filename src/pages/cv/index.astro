@@ -1,0 +1,6 @@
+---
+import { getEntry } from 'astro:content';
+import Cv from '../../layouts/Cv.astro';
+const cv = (await getEntry('cv', 'en'))!;
+---
+<Cv cv={cv.data} />
