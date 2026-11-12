@@ -1,58 +1,53 @@
-# Šimon Káňa — Personal site
+# Šimon Káňa — personal site
 
-A simple Jekyll site for a portfolio and notebook. Warm paper colors, brighter accents, clear typography, and a few playful details give it a personal feel. The pages use plain Liquid, Markdown, semantic HTML, and one custom stylesheet. There is no database or admin service to maintain: edit the files, commit, and push.
+A small static site built with [Astro](https://astro.build), hosted on Vercel. Content lives in Markdown, JSON and YAML in this repo: edit a file, push, and Vercel rebuilds.
 
-## Preview locally
+> **Migration in progress.** The Jekyll files (`_config.yml`, `_layouts/`, `_posts/`, `*.markdown`, `assets/`, `Gemfile*`) are still here and still deploy the old site to GitHub Pages. They will be removed after the switch-over. See `MIGRATION_NOTES.md`.
 
-1. Install Ruby and Bundler if they are not already installed.
-2. From this folder, run `bundle install` once.
-3. Run `bundle exec jekyll serve`.
-4. Open the local address printed by Jekyll (usually `http://127.0.0.1:4000`).
+## Run it locally
 
-Jekyll watches content and style files while the server runs. Restart it after changing `_config.yml`.
+Requires Node 22 or newer.
 
-## Edit your site
-
-- **Your name, role, intro, location, and social links:** `_data/profile.yml`
-- **Email address and site-wide SEO text:** `_config.yml`. GitHub and YouTube links live in `_data/profile.yml`.
-- **Portrait photo:** replace `assets/me.webp`; update its alt text in `index.markdown` and `about.markdown` if needed.
-- **Color theme:** follows the visitor’s system setting by default; the moon/sun button switches themes and remembers the choice in that browser.
-- **Navigation:** `_data/navigation.yml`
-- **Homepage copy and sections:** `index.markdown`
-- **Photograph gallery:** full-resolution originals live in `assets/photos/`; the site publishes the smaller WebP copies in `assets/photos/optimized/`. Ordered paths, titles, alt text, and displayed pixel dimensions are in `_data/photographs.yml`. When adding a photograph, create an optimized WebP copy and point its entry there; keep the original files in `assets/photos/`.
-- **About page:** `about.markdown`
-- **CV page:** edit `cv.markdown`; projects added under `_work/` appear there automatically. On `/cv/`, use **Print / save as PDF** and choose “Save as PDF” in the browser print dialog.
-- **Work items:** add Markdown files inside `_work/`. Include front matter fields `title`, `description`, and `category`; `year`, `order`, `image`, and `image_alt` are optional. Put image files in `assets/images/`.
-- **Project starters:** three editable examples live in `_work/`; replace their sample copy and placeholder artwork. Remove `template: true` when a project is ready to appear on your CV, or delete a starter you do not need.
-- **Journal posts:** add a file named `YYYY-MM-DD-your-title.markdown` inside `_posts/`, then add front matter with `title`, `date`, and an optional `excerpt`.
-- **Colors, typography, spacing, and responsive layout:** `assets/css/main.css`
-- **Page structure:** `_layouts/`
-
-Work front matter example:
-
-```yaml
----
-title: "A project name"
-description: "A short, clear sentence about the work."
-category: Web
-year: 2026
-order: 1
-image: /assets/images/project-name.jpg
-image_alt: "A description of the project image"
----
-Write the project story here in Markdown.
+```sh
+npm install
+npm run dev        # http://localhost:4321
+npm run build      # static site in dist/
+npm run preview    # serve dist/
+npm run check      # astro check (types + diagnostics)
+npm test           # Vitest unit tests
+npm run links      # check every internal link in dist/
 ```
 
-## Publish with GitHub Pages
+Copy `.env.example` to `.env` if you want to test analytics locally (it only renders in production builds).
 
-The workflow in `.github/workflows/pages.yml` builds this Jekyll 4.4 site and deploys it through GitHub Actions when you push to `main`. It also builds pull requests so a broken Jekyll build is caught before merging.
+## Edit the content
 
-1. Push the repository to GitHub.
-2. In the repository, open **Settings → Pages** and set the publishing source to **GitHub Actions**.
-3. Push to `main` or run **Build and deploy site** from the Actions tab on `main`. The workflow publishes the generated site and reports its URL.
+| What | Where |
+|---|---|
+| **The living sentence** (reading, building, projecting, listening, last photo) | `src/content/now.json`. Update `updatedAt` too. Empty values, or values starting with `TODO`, drop their clause from the sentence, `/api/now.json` and `/now.txt`. `lastPhoto` must be an `id` from `photos.yaml`, or the build fails with a helpful message. |
+| **First line of the homepage** | `src/components/LivingSentence.astro` |
+| **Notebook post** | Add `src/content/notebook/<slug>.md` with `title`, `date` and an optional `excerpt`. The URL is `/notebook/<slug>/`. Set `draft: true` to hide it. |
+| **Photograph** | Put the original JPG in `src/assets/photos/` and add an entry to `src/content/photos.yaml` (`id`, `order`, `title`, `alt`, `image`). Astro creates the AVIF/WebP sizes at build time. |
+| **Project** | Add `src/content/work/<slug>.md` (see `src/content/work/README.txt` for the front matter). While there are none, `/work/` shows one line linking to GitHub. |
+| **About** | `src/pages/about/index.astro` |
+| **CV** | `src/content/cv/en.yaml` and `src/content/cv/cz.yaml`. **After any CV change, run `npm run build && npm run cv:pdf` and commit the two PDFs in `public/cv/`.** |
+| **Privacy notice** | `src/pages/privacy/index.astro` |
+| **Name, links, nav notes** | `src/lib/site.ts` |
+| **Colors, type, spacing** | `src/styles/tokens.css` (`global.css` for base styles, `print.css` for the CV) |
 
-The site is currently configured for `https://simonkana.github.io` with an empty `baseurl`, which is correct when the repository is named `simonkana.github.io`. The workflow reads the Pages base path when it builds, so project repositories work too. Keep `url` set to the site’s origin; for local previews of a project site, set `baseurl` to `/<repository-name>`. If you use a custom domain, update `url` and configure that domain in the Pages settings.
+## How it fits together
 
-## Content editing options
+- `src/lib/sentence.ts` builds the sentence clauses, the JSON object and the plain-text version, so the homepage, `/api/now.json` and `/now.txt` always match. `src/lib/now.ts` loads the data from the content collections.
+- `src/scripts/home.ts` is the only real JavaScript: the human/machine toggle, the relative "updated" time and the GSAP motion. Everything is in the HTML without JS, and with `prefers-reduced-motion` nothing animates.
+- The CV pages load one tiny script for the print button. Other inner pages ship no JavaScript.
+- No inline scripts or styles are emitted (`inlineStylesheets: 'never'`, `assetsInlineLimit: 0`), so the Content Security Policy in `vercel.json` can stay `'self'`-only.
 
-The easiest and most accessible editor is the GitHub web interface: open a Markdown or YAML file, choose the pencil icon, edit, and commit. A full CMS is intentionally not required for this setup. If you later want a visual editor, Decap CMS or another Git-based CMS can edit the same files; configure authentication and hosting as a separate step.
+## Deploy (Vercel)
+
+1. Import the repository in Vercel. The Astro preset and `vercel.json` handle the build (`npm run build`, output `dist/`).
+2. Set the environment variables from `.env.example`: `PUBLIC_SITE_URL`, `PUBLIC_UMAMI_SRC` and `PUBLIC_UMAMI_WEBSITE_ID`. Umami only runs on the host in `PUBLIC_SITE_URL`, so previews are never tracked.
+3. `vercel.json` holds the redirects from the old Jekyll URLs, the `curl <domain>/now` rewrite, caching and security headers. The CSP starts as `Content-Security-Policy-Report-Only`. Once the preview shows no violations in the browser console, rename the header to `Content-Security-Policy`.
+
+## Privacy
+
+The site sets no cookies and embeds no third-party content. If that ever changes (embeds, other analytics, chat widgets…), add a consent mechanism first and update `/privacy/`. The same note is in `src/layouts/Base.astro`.

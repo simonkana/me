@@ -1,0 +1,66 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "astro",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/journal/:year/:month/:day/:slug/", "destination": "/notebook/:slug/", "permanent": true },
+    { "source": "/journal/:year/:month/:day/:slug", "destination": "/notebook/:slug/", "permanent": true },
+    { "source": "/journal/", "destination": "/notebook/", "permanent": true },
+    { "source": "/journal", "destination": "/notebook/", "permanent": true },
+    { "source": "/work/:slug/", "destination": "/work/", "permanent": true },
+    { "source": "/work/:slug", "destination": "/work/", "permanent": true },
+    { "source": "/sitemap.xml", "destination": "/sitemap-index.xml", "permanent": true },
+    { "source": "/assets/me.webp", "destination": "/og/me.webp", "permanent": true },
+    {
+      "source": "/now",
+      "missing": [{ "type": "header", "key": "user-agent", "value": "curl.*" }],
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/now/",
+      "missing": [{ "type": "header", "key": "user-agent", "value": "curl.*" }],
+      "destination": "/",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    { "source": "/now", "has": [{ "type": "header", "key": "user-agent", "value": "curl.*" }], "destination": "/now.txt" },
+    { "source": "/now/", "has": [{ "type": "header", "key": "user-agent", "value": "curl.*" }], "destination": "/now.txt" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()" },
+        {
+          "key": "Content-Security-Policy-Report-Only",
+          "value": "default-src 'self'; script-src 'self' https://cloud.umami.is; connect-src 'self' https://cloud.umami.is https://api-gateway.umami.dev; img-src 'self'; style-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+        }
+      ]
+    },
+    {
+      "source": "/_astro/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/api/now.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json; charset=utf-8" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/now.txt",
+      "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
+    },
+    {
+      "source": "/cv/(.*).pdf",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600" }]
+    }
+  ]
+}

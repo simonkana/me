@@ -10,7 +10,7 @@
     "check": "astro check",
     "test": "vitest run",
     "cv:pdf": "node scripts/cv-pdf.ts",
-    "links": "linkinator dist --recurse --skip '^(?!http://localhost)'"
+    "links": "linkinator dist --recurse --skip '^https?://(?!localhost|127\\.0\\.0\\.1)'"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

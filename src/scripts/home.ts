@@ -55,6 +55,13 @@ function linesOf(view: View): Element[] {
   return view === 'machine' ? Array.from(panel.querySelectorAll('.json-bar, .jl')) : Array.from(panel.querySelectorAll('.s-line'));
 }
 
+function settle(el: HTMLElement, text: string, sr: HTMLElement) {
+  el.textContent = text;
+  el.removeAttribute('aria-hidden');
+  el.removeAttribute('aria-label');
+  sr.remove();
+}
+
 /**
  * Scramble each live value into its real text. While it runs, the animated span is
  * aria-hidden and a visually hidden copy carries the real value for screen readers.
@@ -72,9 +79,13 @@ function scramble(view: View, delay = 0): gsap.core.Timeline {
         duration: 0.75,
         scrambleText: { text, chars: CHARS, revealDelay: 0.2, speed: 0.6 },
         ease: 'none',
-        onStart: () => { el.before(sr); el.setAttribute('aria-hidden', 'true'); },
-        onComplete: () => { el.textContent = text; el.removeAttribute('aria-hidden'); sr.remove(); },
-        onInterrupt: () => { el.textContent = text; el.removeAttribute('aria-hidden'); sr.remove(); },
+        onStart: () => {
+          // A link must stay focusable, so it keeps its real name in aria-label instead.
+          if (el.matches('a')) el.setAttribute('aria-label', text);
+          else { el.before(sr); el.setAttribute('aria-hidden', 'true'); }
+        },
+        onComplete: () => settle(el, text, sr),
+        onInterrupt: () => settle(el, text, sr),
       },
       i * 0.11,
     );

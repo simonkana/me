@@ -85,3 +85,34 @@ The Astro project lives in the **repo root**, next to the Jekyll files. Astro on
 again in Phase 9 and would break Vercel's root detection for previews. Name clashes in the root:
 `README.md` (Jekyll README kept until Phase 9), `.gitignore` (merged), `404.html` and `robots.txt`
 (Jekyll-only, in the root; Astro uses `src/pages/404.astro` and `public/robots.txt`).
+
+## 6. Decisions and deviations from the plan (Phases 2–8)
+
+| Plan | What was built | Why |
+|---|---|---|
+| Astro 5+ Content Layer | Astro **7.4** (`file`/`glob` loaders unchanged; `z` imported from `astro/zod`, which is Zod 4) | Latest stable at build time |
+| SplitText for the line rise | Small custom splitter in `home.ts`: words become plain inline spans, grouped into lines by measured position, risen with relative `top`. ScrambleText is used as planned. | SplitText wraps words in inline-blocks, which changes where lines break around the italic live values, and it never slices links. The text visibly jumped when the split was reverted. The custom splitter keeps the browser's own line breaks, so nothing moves, and it saves ~7 KB. |
+| `.js` class on `<html>` hides text until GSAP runs | Text is hidden by CSS only under `prefers-reduced-motion: no-preference`, with the 2s failsafe. `<noscript>` loads `/noscript.css`, which reveals it and hides the toggle. | No inline script needed, so the CSP stays `'self'`-only. Reduced-motion users never see hidden text. |
+| CSP header (Report-Only first) | As planned in `vercel.json`. The build emits **no inline scripts or styles** (`inlineStylesheets: 'never'`, `assetsInlineLimit: 0`), so no hashes are needed. Astro's own `security.csp` is not used, because it only produces a `<meta>` tag, which cannot be Report-Only. | |
+| Seed `now.json` with `TODO(simon)` | Done, and values starting with `TODO` are treated as empty, so their clause is dropped. The live site can never show a placeholder. | |
+| Homepage first line | "I build software in Prague. I play guitar, sing and climb." All copy is in the first person, per Šimon. | Chat decision |
+| `--accent: #b4532a` | Kept: it measures 4.52:1 on `--paper`. All dark-mode pairs pass (ink 15.1, muted 6.6, accent 6.9). | |
+| Sitemap | `@astrojs/sitemap` writes `/sitemap-index.xml`; `/sitemap.xml` redirects there. | |
+| Work items | Rendered inline on `/work/` (anchors per project); there are no `/work/<slug>/` pages yet. | The plan lists no detail route. |
+| Toggle focus | Focus moves to the newly shown view only if it was on the toggle; otherwise it stays put. | §5.4 |
+| Fonts | Latin + Latin Extended subsets only (covers Czech). | |
+| CZ CV education place | Corrected to "Vsetín, Česká republika". | Chat decision |
+
+## 7. Quality results (local `astro preview`, Lighthouse 12, mobile)
+
+| Page | Performance | Accessibility | Best practices | SEO |
+|---|---|---|---|---|
+| `/` | 99 | 100 | 100 | 100 |
+| `/photographs/` | 90–93 | 100 | 100 | 100 |
+| `/cv/` | 100 | 100 | 100 | 100 |
+
+`/photographs/` is limited by the first full-width portrait photo (LCP ≈ 3.2 s under simulated slow 4G). AVIF quality is already lowered to 50, with finer width steps. Going further means changing the design (for example capping photo height), which is Šimon's call.
+
+Other checks: `astro check` 0 errors/warnings/hints, `vitest` 10/10, build without warnings, homepage JS 32 KB gzipped (budget 60 KB), no horizontal scroll at 360 px on any page in light or dark mode, no console errors, no-JS and reduced-motion render everything immediately, both CV PDFs are exactly 2 pages, linkinator: 112 internal links OK, Jekyll still builds and ignores the Astro files.
+
+Not verifiable locally (check on the Vercel preview): redirects, the `curl` rewrite, response headers, the CSP report, and the Umami script on the real domain.
