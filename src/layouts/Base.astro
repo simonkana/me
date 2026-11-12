@@ -14,12 +14,15 @@ import Seo from '../components/Seo.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Umami from '../components/Umami.astro';
+// Applied before first paint (no flash). Allowed by its sha256 hash in vercel.json's CSP;
+// src/lib/csp.test.ts fails if the two drift apart.
+import themeInline from '../scripts/theme-inline.js?raw';
 
 /*
  * CONSENT NOTE
  * This site sets no cookies: Umami is cookieless, fonts are self-hosted, nothing is embedded from
  * YouTube or other third parties (links only), and localStorage only keeps the human/machine
- * toggle preference (strictly functional). That is why there is no consent banner.
+ * view and the light/dark theme preferences (strictly functional). That is why there is no consent banner.
  * If any cookie-setting or tracking third party is ever added (embeds, Google Analytics, chat
  * widgets, …), a consent mechanism must be added FIRST, and /privacy/ must be updated.
  */
@@ -47,6 +50,7 @@ const { lang = 'en', home = false, jsonLd, ...seo } = Astro.props;
     <meta name="theme-color" content="#faf3e5" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#171512" media="(prefers-color-scheme: dark)" />
     <meta name="color-scheme" content="light dark" />
+    <script is:inline set:html={themeInline} />
     <link rel="preload" href={serifRegular} as="font" type="font/woff2" crossorigin />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <Seo {...seo} locale={lang === 'cs' ? 'cs_CZ' : 'en_US'} />

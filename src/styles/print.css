@@ -1,7 +1,7 @@
 /* CV print styles: A4, black on white, two pages. Screen spacing is untouched. */
 @media print {
   @page { size: A4; margin: 15mm 16mm; }
-  :root { --paper: #fff; --ink: #000; --muted: #444; --rule: #bbb; --accent: #000; }
+  :root, :root[data-theme] { color-scheme: light; --paper: #fff; --ink: #000; --muted: #444; --rule: #bbb; --accent: #000; }
   html, body { background: #fff !important; color: #000 !important; font-size: 10.6pt; line-height: 1.38; }
   body { display: block; min-height: 0; }
   .site-header, .site-footer, .skip-link, .no-print, [data-toggle] { display: none !important; }

@@ -39,8 +39,9 @@ Copy `.env.example` to `.env` if you want to test analytics locally (it only ren
 
 - `src/lib/sentence.ts` builds the sentence clauses, the JSON object and the plain-text version, so the homepage, `/api/now.json` and `/now.txt` always match. `src/lib/now.ts` loads the data from the content collections.
 - `src/scripts/home.ts` is the only real JavaScript: the human/machine toggle, the relative "updated" time and the GSAP motion. Everything is in the HTML without JS, and with `prefers-reduced-motion` nothing animates.
-- Inner pages ship no JavaScript. The CV offers the pre-generated PDFs; the print stylesheet still applies when someone prints the page (and is what `npm run cv:pdf` uses).
-- No inline scripts or styles are emitted (`inlineStylesheets: 'never'`, `assetsInlineLimit: 0`), so the Content Security Policy in `vercel.json` can stay `'self'`-only.
+- Light/dark mode follows the system until someone uses the footer toggle (stored in `localStorage`). `src/scripts/theme-inline.js` is inlined in `<head>` so there is no flash; the CSP allows it by its sha256 hash, and `npm test` fails if you edit the script without updating that hash in `vercel.json`.
+- Apart from that tiny theme script, inner pages ship no JavaScript. The CV offers the pre-generated PDFs; the print stylesheet still applies when someone prints the page (and is what `npm run cv:pdf` uses).
+- No other inline scripts or styles are emitted (`inlineStylesheets: 'never'`, `assetsInlineLimit: 0`), so the Content Security Policy in `vercel.json` stays `'self'` plus that one hash.
 
 ## Deploy (Vercel)
 

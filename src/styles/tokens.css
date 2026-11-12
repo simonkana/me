@@ -22,8 +22,10 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Dark palette: follows the system unless the footer toggle set data-theme on <html>. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
     --paper: #171512;
     --ink: #f1e9da; /* 15.1:1 */
     --muted: #a39a8c; /* 6.6:1 */
@@ -31,3 +33,12 @@
     --accent: #e08a5e; /* 6.9:1 */
   }
 }
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #171512;
+  --ink: #f1e9da;
+  --muted: #a39a8c;
+  --rule: rgb(241 233 218 / 0.14);
+  --accent: #e08a5e;
+}
+:root[data-theme='light'] { color-scheme: light; }

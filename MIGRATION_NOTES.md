@@ -102,6 +102,7 @@ again in Phase 9 and would break Vercel's root detection for previews. Name clas
 | Toggle focus | Focus moves to the newly shown view only if it was on the toggle; otherwise it stays put. | §5.4 |
 | Fonts | Latin + Latin Extended subsets only (covers Czech). | |
 | CZ CV education place | Corrected to "Vsetín, Česká republika". | Chat decision |
+| Theme | `prefers-color-scheme` plus a footer light/dark toggle (stored in `localStorage`). One inline head script avoids a flash; the CSP allows it by hash, and a Vitest test guards the hash. Print always uses light colors. | Šimon's request |
 | CV "Print / save as PDF" button | Removed; only "Download PDF" remains, and the CV ships no JavaScript. The print stylesheet stays (browser printing and `npm run cv:pdf`). | Šimon's request |
 
 ## 7. Quality results (local `astro preview`, Lighthouse 12, mobile)
@@ -109,11 +110,11 @@ again in Phase 9 and would break Vercel's root detection for previews. Name clas
 | Page | Performance | Accessibility | Best practices | SEO |
 |---|---|---|---|---|
 | `/` | 99 | 100 | 100 | 100 |
-| `/photographs/` | 94 | 100 | 100 | 100 |
+| `/photographs/` | 94–98 | 100 | 100 | 100 |
 | `/cv/` | 99 | 100 | 100 | 100 |
 
 `/photographs/` is limited by the first full-width portrait photo (LCP ≈ 3.0 s under simulated slow 4G; the 700w AVIF is 130 KB). Photos use AVIF/WebP at quality 45 with 7 width steps, the `<img>` fallback is capped at 1600 px, and every photo after the first is `loading="lazy"`. The first one is deliberately eager with `fetchpriority="high"`, because it is the LCP element. Going further means changing the design (for example capping photo height).
 
-Other checks: `astro check` 0 errors/warnings/hints, `vitest` 10/10, build without warnings, homepage JS 32 KB gzipped (budget 60 KB), no horizontal scroll at 360 px on any page in light or dark mode, no console errors, no-JS and reduced-motion render everything immediately, both CV PDFs are exactly 2 pages, linkinator: 112 internal links OK, Jekyll still builds and ignores the Astro files.
+Other checks: `astro check` 0 errors/warnings/hints, `vitest` 11/11, no violations with the CSP enforced (simulated in Playwright), build without warnings, homepage JS 32 KB gzipped (budget 60 KB), no horizontal scroll at 360 px on any page in light or dark mode, no console errors, no-JS and reduced-motion render everything immediately, both CV PDFs are exactly 2 pages, linkinator: 112 internal links OK, Jekyll still builds and ignores the Astro files.
 
 Not verifiable locally (check on the Vercel preview): redirects, the `curl` rewrite, response headers, the CSP report, and the Umami script on the real domain.
