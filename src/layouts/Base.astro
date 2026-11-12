@@ -1,0 +1,63 @@
+---
+// Latin + Latin Extended only (covers Czech).
+import '@fontsource/instrument-serif/latin-400.css';
+import '@fontsource/instrument-serif/latin-ext-400.css';
+import '@fontsource/instrument-serif/latin-400-italic.css';
+import '@fontsource/instrument-serif/latin-ext-400-italic.css';
+import '@fontsource/jetbrains-mono/latin-400.css';
+import '@fontsource/jetbrains-mono/latin-ext-400.css';
+import '@fontsource/jetbrains-mono/latin-500.css';
+import '@fontsource/jetbrains-mono/latin-ext-500.css';
+import '../styles/global.css';
+import serifRegular from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
+import Seo from '../components/Seo.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Umami from '../components/Umami.astro';
+
+/*
+ * CONSENT NOTE
+ * This site sets no cookies: Umami is cookieless, fonts are self-hosted, nothing is embedded from
+ * YouTube or other third parties (links only), and localStorage only keeps the human/machine
+ * toggle preference (strictly functional). That is why there is no consent banner.
+ * If any cookie-setting or tracking third party is ever added (embeds, Google Analytics, chat
+ * widgets, …), a consent mechanism must be added FIRST, and /privacy/ must be updated.
+ */
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  noindex?: boolean;
+  type?: 'website' | 'article' | 'profile';
+  published?: Date;
+  lang?: 'en' | 'cs';
+  home?: boolean;
+  jsonLd?: object;
+}
+
+const { lang = 'en', home = false, jsonLd, ...seo } = Astro.props;
+---
+<!doctype html>
+<html lang={lang} class={home ? 'home' : undefined}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#faf3e5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#171512" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="preload" href={serifRegular} as="font" type="font/woff2" crossorigin />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <Seo {...seo} locale={lang === 'cs' ? 'cs_CZ' : 'en_US'} />
+    {jsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />}
+    <slot name="head" />
+    <Umami />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header home={home} />
+    <main id="main"><slot /></main>
+    <Footer />
+  </body>
+</html>

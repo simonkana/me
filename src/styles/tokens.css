@@ -1,0 +1,33 @@
+:root {
+  color-scheme: light dark;
+  --paper: #faf3e5;
+  --ink: #1c1a17; /* 15.7:1 */
+  --muted: #6b6359; /* contrast on --paper: 5.35:1 */
+  --rule: rgb(28 26 23 / 0.14);
+  --accent: #b4532a; /* 4.52:1, live values only */
+
+  --serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --fs-sentence: clamp(30px, 4.6vw, 58px);
+  --fs-index: clamp(26px, 3vw, 34px);
+  --fs-h1: clamp(40px, 6vw, 72px);
+  --fs-body: clamp(20px, 1.2vw + 14px, 22px);
+  --fs-mono: 13px;
+  --fs-label: 12px;
+
+  --col: 860px;
+  --gutter: clamp(16px, 5vw, 64px);
+  --rhythm: clamp(56px, 9vw, 112px);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #171512;
+    --ink: #f1e9da; /* 15.1:1 */
+    --muted: #a39a8c; /* 6.6:1 */
+    --rule: rgb(241 233 218 / 0.14);
+    --accent: #e08a5e; /* 6.9:1 */
+  }
+}

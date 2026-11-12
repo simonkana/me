@@ -1,0 +1,3 @@
+/* Loaded only without JavaScript (<noscript>): show everything, hide the human/machine toggle. */
+.reveal { opacity: 1 !important; animation: none !important; }
+[data-toggle] { display: none !important; }

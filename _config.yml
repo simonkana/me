@@ -60,3 +60,15 @@ exclude:
   - assets/photos/05-a-familiar-shape.webp
   - assets/photos/06-amber-after-dark.jpg
   - assets/photos/06-amber-after-dark.webp
+  # Astro project (kept side by side until the switch-over, see MIGRATION_NOTES.md)
+  - src/
+  - public/
+  - scripts/
+  - dist/
+  - astro.config.mjs
+  - tsconfig.json
+  - vercel.json
+  - package.json
+  - package-lock.json
+  - ASTRO_MIGRATION_PLAN.md
+  - MIGRATION_NOTES.md

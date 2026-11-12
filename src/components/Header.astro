@@ -1,0 +1,58 @@
+---
+import { NAV } from '../lib/site';
+
+interface Props {
+  home?: boolean;
+}
+const { home = false } = Astro.props;
+const path = Astro.url.pathname;
+---
+<header class="site-header wrap">
+  <a class="mark mono" href="/" aria-label="Šimon Káňa, home">š.k.</a>
+  {
+    home ? (
+      <div class="toggle" role="group" aria-label="View" data-toggle>
+        <button type="button" aria-pressed="true" data-view="human">human</button>
+        <button type="button" aria-pressed="false" data-view="machine" data-umami-event="toggle-machine">machine</button>
+      </div>
+    ) : (
+      <nav aria-label="Main">
+        <ul>
+          {NAV.map((item) => (
+            <li>
+              <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )
+  }
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    flex-wrap: wrap;
+    padding-top: clamp(20px, 3vw, 32px);
+  }
+  .mark { font-weight: 500; text-decoration: none; font-size: 14px; padding: 6px 0; }
+  nav ul { display: flex; flex-wrap: wrap; gap: 4px 18px; list-style: none; margin: 0; padding: 0; }
+  nav a { font-family: var(--mono); font-size: var(--fs-mono); color: var(--muted); text-decoration: none; padding: 6px 0; display: inline-block; }
+  nav a:hover, nav a[aria-current='page'] { color: var(--ink); }
+  nav a[aria-current='page'] { text-decoration: underline; text-decoration-color: var(--accent); }
+
+  .toggle { display: inline-flex; border: 1px solid var(--ink); border-radius: 999px; padding: 2px; }
+  .toggle button {
+    font: inherit; font-family: var(--mono); font-size: var(--fs-mono);
+    background: transparent; color: var(--ink); border: 0; border-radius: 999px;
+    padding: 6px 14px; cursor: pointer; min-height: 32px;
+    transition: background-color 0.2s var(--ease), color 0.2s var(--ease);
+  }
+  .toggle button[aria-pressed='true'] { background: var(--ink); color: var(--paper); }
+  .toggle button:focus-visible { outline-offset: 2px; }
+</style>

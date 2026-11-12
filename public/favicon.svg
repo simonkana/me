@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>.bg{fill:#faf3e5}.fg{fill:#1c1a17}@media (prefers-color-scheme:dark){.bg{fill:#171512}.fg{fill:#f1e9da}}</style>
+  <rect class="bg" width="64" height="64" rx="14"/>
+  <text class="fg" x="32" y="46" text-anchor="middle" font-family="Georgia,serif" font-size="43">Š</text>
+  <circle cx="53" cy="51" r="4" fill="#b4532a"/>
+</svg>

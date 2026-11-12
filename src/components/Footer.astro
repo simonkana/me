@@ -1,0 +1,28 @@
+---
+import { SITE, host } from '../lib/site';
+const year = new Date().getFullYear();
+const domain = host(Astro.site);
+---
+<footer class="site-footer wrap">
+  <hr class="rule" />
+  <div class="row mono">
+    <p class="curl"><span class="muted" aria-hidden="true">$</span> <a href="/now.txt">curl {domain}/now</a></p>
+    <ul>
+      <li><a href={SITE.links.github} rel="me">GitHub ↗</a></li>
+      <li><a href={SITE.links.youtube} rel="me">YouTube ↗</a></li>
+      <li><a href="/feed.xml">RSS ↗</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+      <li class="muted">Prague · {year}</li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer { padding-bottom: clamp(24px, 4vw, 40px); }
+  .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; padding-top: 20px; color: var(--muted); }
+  p { margin: 0; }
+  ul { display: flex; flex-wrap: wrap; gap: 6px 16px; list-style: none; margin: 0; padding: 0; }
+  a { color: var(--muted); text-decoration: none; }
+  a:hover { color: var(--ink); }
+  .curl a { color: var(--ink); }
+</style>
