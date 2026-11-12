@@ -118,3 +118,7 @@ again in Phase 9 and would break Vercel's root detection for previews. Name clas
 Other checks: `astro check` 0 errors/warnings/hints, `vitest` 11/11, no violations with the CSP enforced (simulated in Playwright), build without warnings, homepage JS 32 KB gzipped (budget 60 KB), no horizontal scroll at 360 px on any page in light or dark mode, no console errors, no-JS and reduced-motion render everything immediately, both CV PDFs are exactly 2 pages, linkinator: 112 internal links OK, Jekyll still builds and ignores the Astro files.
 
 Not verifiable locally (check on the Vercel preview): redirects, the `curl` rewrite, response headers, the CSP report, and the Umami script on the real domain.
+
+## 8. Switch-over (Phase 9)
+
+GitHub Pages was unpublished, and the Jekyll sources, the Pages workflow and the local Jekyll build output were removed in one commit. This plan and these notes moved to `docs/`.

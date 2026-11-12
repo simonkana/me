@@ -1,4 +1,4 @@
-// Site-wide facts, ported from _config.yml and _data/profile.yml.
+// Site-wide facts (originally ported from the Jekyll site's config and profile data).
 export const SITE = {
   name: 'Šimon Káňa',
   initials: 'š.k.',
