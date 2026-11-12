@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../lib/site';
+const updated = '12 November 2026';
+---
+<Base title="Privacy & site notice" description="Who runs this site, what is measured (anonymously, without cookies) and your rights.">
+  <!-- TODO(simon): have this reviewed. It is a plain-language starting point, not legal advice. -->
+  <!-- TODO(simon): confirm the contact address to publish (currently the same one as on the CV). -->
+  <!-- TODO(simon): confirm the Umami Cloud data region shown in your Umami account settings. -->
+  <div class="wrap page">
+    <header class="page-head">
+      <p class="label">Privacy &amp; site notice</p>
+      <h1 class="page-title">I don’t track you.</h1>
+      <p class="lede">I measure a few anonymous numbers to see whether anyone reads this. That’s all of it.</p>
+    </header>
+
+    <div class="prose">
+      <h2>Who runs this site</h2>
+      <p>I do: Šimon Káňa, Prague, Czechia. You can reach me at <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+
+      <h2>What I measure</h2>
+      <p>
+        I use <a href="https://umami.is/">Umami</a>, a privacy-friendly analytics tool, hosted by Umami Cloud. It counts anonymous page views and records the referring site, browser, operating system, device type and country. It sets no cookies, does not follow you across other sites and builds no personal profile. If your browser sends a Do Not Track signal, the script doesn’t count you at all.
+      </p>
+
+      <h2>Hosting</h2>
+      <p>
+        The site is hosted by Vercel. To deliver the pages, Vercel processes technical request data, such as your IP address, in its server logs. See <a href="https://vercel.com/legal/privacy-policy">Vercel’s privacy policy</a>.
+      </p>
+
+      <h2>Local storage</h2>
+      <p>The only thing this site keeps in your browser is whether you last chose the “human” or “machine” view on the homepage. It never leaves your device.</p>
+
+      <h2>No cookies, no forms, no newsletter</h2>
+      <p>There’s nothing to sign up for and nothing to accept. YouTube, GitHub and LinkedIn are plain links, not embeds.</p>
+
+      <h2>Your rights</h2>
+      <p>
+        Under the GDPR you can ask me what data about you I hold, ask me to delete it, or object to its processing. Since I don’t collect personal data myself, there usually isn’t any, but write to <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and I’ll check. You can also complain to the Czech data protection authority, the <a href="https://uoou.gov.cz/en">Office for Personal Data Protection (ÚOOÚ)</a>.
+      </p>
+
+      <p class="updated mono muted">Last updated {updated}</p>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .updated { margin-top: 2.5em !important; font-size: var(--fs-label); }
+</style>

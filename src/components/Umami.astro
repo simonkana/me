@@ -1,0 +1,21 @@
+---
+// Renders Umami only in production builds and only when both env vars are set,
+// so local dev and unconfigured previews are never tracked.
+const src = import.meta.env.PUBLIC_UMAMI_SRC;
+const websiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
+const domain = new URL(Astro.site ?? 'https://simonkana.vercel.app').hostname;
+const enabled = import.meta.env.PROD && Boolean(src) && Boolean(websiteId);
+---
+{
+  enabled && (
+    <script
+      is:inline
+      defer
+      src={src}
+      data-website-id={websiteId}
+      data-domains={domain}
+      data-do-not-track="true"
+      data-exclude-search="true"
+    />
+  )
+}
