@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import LivingSentence from '../components/LivingSentence.astro';
+import IndexList from '../components/IndexList.astro';
+import { getNow } from '../lib/now';
+import { personJsonLd } from '../lib/site';
+
+const now = await getNow(Astro.site);
+---
+<Base home jsonLd={personJsonLd(Astro.site)}>
+  <noscript slot="head"><link rel="stylesheet" href="/noscript.css" /></noscript>
+  <div class="wrap">
+    <LivingSentence now={now} />
+    <IndexList />
+  </div>
+</Base>
+
+<script>
+  import '../scripts/home.ts';
+</script>

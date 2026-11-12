@@ -1,0 +1,48 @@
+---
+import { NAV } from '../lib/site';
+---
+<nav class="index" aria-label="Sections">
+  <ol>
+    {
+      NAV.map((item) => (
+        <li class="reveal">
+          <a href={item.href}>
+            <span class="n mono" aria-hidden="true">{item.n}</span>
+            <span class="t">{item.label}</span>
+            <span class="note mono">{item.note}</span>
+            <span class="arr mono" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<style>
+  .index { margin-top: var(--rhythm); }
+  ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+  li { border-bottom: 1px solid var(--rule); }
+  a {
+    display: grid;
+    grid-template-columns: 2.6em 1fr auto auto;
+    align-items: baseline;
+    gap: 4px 16px;
+    padding: 18px 0;
+    text-decoration: none;
+    transition: transform 0.35s var(--ease);
+  }
+  a:hover, a:focus-visible { transform: translateX(12px); }
+  .n { color: var(--muted); font-size: var(--fs-label); }
+  .t { font-size: var(--fs-index); line-height: 1.1; }
+  .note { color: var(--muted); font-size: var(--fs-label); text-align: right; }
+  .arr { color: var(--muted); transition: color 0.2s; }
+  a:hover .arr { color: var(--accent); }
+  @media (max-width: 560px) {
+    a { grid-template-columns: 2.2em 1fr auto; }
+    .note { grid-column: 2; grid-row: 2; text-align: left; }
+    .arr { grid-column: 3; grid-row: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    a, a:hover, a:focus-visible { transform: none; transition: none; }
+  }
+</style>

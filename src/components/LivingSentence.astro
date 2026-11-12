@@ -1,0 +1,102 @@
+---
+import type { Segment } from '../lib/sentence';
+import { highlightJson } from '../lib/json-highlight';
+import { pragueIso } from '../lib/sentence';
+import type { getNow } from '../lib/now';
+
+type Now = Awaited<ReturnType<typeof getNow>>;
+interface Props {
+  now: Now;
+}
+const { now } = Astro.props;
+
+const lines: Segment[][] = [
+  [{ kind: 'text', text: 'I build software in Prague. I\u00a0play guitar, sing and climb.' }],
+  ...[now.sentence.now, now.sentence.photo].filter((l): l is Segment[] => l !== null),
+];
+
+const isLive = (path: string) => path.startsWith('now.') || path === 'last_photo.title';
+const jsonHtml = highlightJson(now.json, isLive);
+const absolute = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Europe/Prague' }).format(now.updatedAt);
+---
+<section class="living" aria-label="Now">
+  <div class="view" id="view-human" data-panel="human" tabindex="-1">
+    <h1 class="sr-only">Šimon Káňa</h1>
+    {
+      lines.map((segments) => (
+        <p class="s-line reveal">
+          {segments.map((s) =>
+            s.kind === 'text' ? (
+              s.text
+            ) : s.href ? (
+              <a class="live live-text" href={s.href} data-key={s.key}>{s.text}</a>
+            ) : (
+              <em class="live live-text" data-key={s.key}>{s.text}</em>
+            ),
+          )}
+        </p>
+      ))
+    }
+  </div>
+
+  <div class="view machine" id="view-machine" data-panel="machine" role="region" aria-label="The same information as JSON" tabindex="-1" hidden>
+    <div class="json-bar mono">
+      <span><a href="/api/now.json">GET /api/now.json</a></span>
+      <span class="muted">200 OK · application/json</span>
+    </div>
+    <pre class="json"><code set:html={jsonHtml} /></pre>
+  </div>
+
+  <p class="meta mono reveal">
+    <span class="dot" aria-hidden="true"></span>
+    live · updated <time datetime={pragueIso(now.updatedAt)} data-relative>{absolute}</time>
+  </p>
+</section>
+
+<style>
+  .living { padding-top: var(--rhythm); }
+  .view { outline: none; }
+  .s-line {
+    font-size: var(--fs-sentence);
+    line-height: 1.16;
+    letter-spacing: -0.01em;
+    margin: 0;
+    max-width: 22ch;
+    text-wrap: pretty;
+  }
+  .s-line + .s-line { margin-top: 0.5em; }
+  .s-line:first-of-type { max-width: 20ch; }
+  .live { color: var(--accent); font-style: italic; }
+  .s-line :global(.s-word) { position: relative; }
+  /* While lines rise in, the link underline lives on the words (so it fades with them). */
+  .s-line:global(.splitting) a.live { text-decoration-color: transparent; }
+  .s-line:global(.splitting) a.live :global(.s-word) { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.12em; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+  a.live { text-decoration-thickness: 1px; text-underline-offset: 0.12em; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+  a.live:hover { text-decoration-color: var(--accent); }
+
+  .machine { border: 1px solid var(--rule); }
+  .json-bar { display: flex; justify-content: space-between; gap: 8px 16px; flex-wrap: wrap; padding: 10px 14px; border-bottom: 1px solid var(--rule); font-size: var(--fs-label); }
+  .json-bar a { text-decoration: none; }
+  .json-bar a:hover { text-decoration: underline; }
+  .json {
+    margin: 0;
+    padding: 18px 14px 20px;
+    font-family: var(--mono);
+    font-size: clamp(12px, 1.6vw, 15px);
+    line-height: 1.65;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    tab-size: 2;
+  }
+  .json :global(.jl) { display: inline-block; }
+  .json :global(.j-k), .json :global(.j-p) { color: var(--muted); }
+  .json :global(.j-v) { color: var(--ink); }
+  .json :global(.j-live) { color: var(--accent); }
+
+  .meta { display: flex; align-items: center; gap: 10px; margin: clamp(28px, 4vw, 44px) 0 0; color: var(--muted); }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); position: relative; flex: none; }
+  .dot::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid var(--accent); opacity: 0; animation: pulse 2.4s var(--ease) infinite; }
+  @keyframes pulse { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .dot::after { animation: none; } }
+</style>
