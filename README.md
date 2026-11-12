@@ -39,7 +39,7 @@ Copy `.env.example` to `.env` if you want to test analytics locally (it only ren
 
 - `src/lib/sentence.ts` builds the sentence clauses, the JSON object and the plain-text version, so the homepage, `/api/now.json` and `/now.txt` always match. `src/lib/now.ts` loads the data from the content collections.
 - `src/scripts/home.ts` is the only real JavaScript: the human/machine toggle, the relative "updated" time and the GSAP motion. Everything is in the HTML without JS, and with `prefers-reduced-motion` nothing animates.
-- The CV pages load one tiny script for the print button. Other inner pages ship no JavaScript.
+- Inner pages ship no JavaScript. The CV offers the pre-generated PDFs; the print stylesheet still applies when someone prints the page (and is what `npm run cv:pdf` uses).
 - No inline scripts or styles are emitted (`inlineStylesheets: 'never'`, `assetsInlineLimit: 0`), so the Content Security Policy in `vercel.json` can stay `'self'`-only.
 
 ## Deploy (Vercel)

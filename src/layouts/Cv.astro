@@ -27,7 +27,6 @@ const siteUrl = abs('/', Astro.site);
           <span class="muted" aria-hidden="true">|</span>
           <a href="/cv/cz/" hreflang="cs" lang="cs" aria-current={cv.lang === 'cs' ? 'page' : undefined}>CZ</a>
         </nav>
-        <button type="button" data-print>{L.print}</button>
         {hasPdf && (
           <a class="pdf" href={pdf} download data-umami-event="cv-download" data-umami-event-lang={code}>
             {L.download} ↓
@@ -119,10 +118,6 @@ const siteUrl = abs('/', Astro.site);
   </div>
 </Base>
 
-<script>
-  document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
-</script>
-
 <style>
   .cv-page { padding-top: clamp(28px, 5vw, 56px); padding-bottom: var(--rhythm); }
   .toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 20px; margin-bottom: clamp(32px, 5vw, 56px); }
@@ -132,11 +127,11 @@ const siteUrl = abs('/', Astro.site);
   .actions nav { display: flex; gap: 8px; }
   .actions nav a { text-decoration: none; color: var(--muted); padding: 4px 2px; }
   .actions nav a[aria-current='page'] { color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); }
-  button, .pdf {
+  .pdf {
     font: inherit; color: var(--ink); background: transparent; cursor: pointer;
     border: 1px solid var(--ink); border-radius: 999px; padding: 7px 14px; text-decoration: none; line-height: 1.2;
   }
-  button:hover, .pdf:hover { background: var(--ink); color: var(--paper); }
+  .pdf:hover { background: var(--ink); color: var(--paper); }
 
   .cv-head { display: flex; justify-content: space-between; gap: 24px 40px; align-items: flex-start; }
   .cv-head .label { margin: 0 0 14px; }

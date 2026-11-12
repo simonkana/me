@@ -74,7 +74,6 @@ const cv = defineCollection({
       eyebrow: z.string(),
       back: z.string(),
       languageNav: z.string(),
-      print: z.string(),
       download: z.string(),
       portraitAlt: z.string(),
       website: z.string(),
