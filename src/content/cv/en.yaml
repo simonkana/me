@@ -1,0 +1,72 @@
+# English CV. Ported verbatim from cv.markdown. After any change, run `npm run cv:pdf`.
+lang: en
+title: "CV"
+description: "Full-stack software engineer in Prague with experience in JavaScript, TypeScript, React, Next.js, Java and Spring Boot."
+location: "Prague, Czech Republic"
+role: "Full-stack Developer · Software Engineer · IT Generalist"
+labels:
+  eyebrow: "Curriculum vitae"
+  back: "← Back to the website"
+  languageNav: "CV language"
+  print: "Print / save as PDF"
+  download: "Download PDF"
+  portraitAlt: "Portrait of Šimon Káňa"
+  website: "Website"
+  profile: "Profile"
+  experience: "Professional experience"
+  education: "Education"
+  skills: "Technical skills"
+  languages: "Languages"
+  personalSkills: "Personal skills"
+  interests: "Interests"
+profile:
+  - "Technically oriented professional with over five years of programming experience and approximately two years of commercial experience in web application development. My strongest areas are JavaScript, TypeScript, React, Next.js, Java and Spring Boot. I have worked on production applications for businesses and startups, as well as independent and freelance projects."
+  - "My experience covers frontend and backend development, REST API design and integration, relational databases, software testing and troubleshooting. I adapt quickly to new technologies and working environments, and value clear communication, reliable software and practical results."
+experience:
+  - role: "Freelance Web Application Developer"
+    period: "Aug 2024 – Jan 2026"
+    org: "Self-employed"
+    points:
+      - "Delivered web applications and smaller software solutions for clients, from requirements analysis and technical design through implementation."
+      - "Built frontend and backend features, worked with databases, REST APIs and external service integrations."
+      - "Created utility scripts and automation, including Python-based solutions."
+      - "Handled deployment, maintenance, troubleshooting and ongoing support, while communicating directly with clients and coordinating requirements."
+  - role: "Full-stack Developer"
+    period: "Oct 2023 – Jun 2025"
+    org: "Sentiscrape s.r.o."
+    points:
+      - "Developed and maintained production web applications for business and startup clients."
+      - "Built frontend features with React, Next.js, JavaScript and TypeScript; developed backend services and REST APIs with Java and Spring Boot."
+      - "Worked with relational databases, primarily MySQL, and ORM technologies."
+      - "Tested functionality with Postman and unit tests, investigated issues using debugging and application logs, and collaborated on technical decisions, testing and deployment."
+      - "Worked with Docker and shared development environments."
+  - role: "Sales Specialist"
+    period: "May 2025 – Jul 2026"
+    org: "Stavebniny DEK"
+    points:
+      - "Helped customers identify their needs and find suitable solutions."
+      - "Worked with internal systems, orders and day-to-day business processes."
+education:
+  - school: "Masaryk Grammar School"
+    period: "2017 – 2021"
+    place: "Vsetín, Czech Republic"
+    details: "Secondary education completed with the school-leaving examination (Maturita); specialised courses in IT and programming."
+skills:
+  - { label: "Languages", value: "JavaScript, TypeScript, Java, Python (practical basics), PHP (basic)" }
+  - { label: "Frameworks", value: "React, Next.js, Node.js, Spring Boot" }
+  - { label: "Data & APIs", value: "MySQL, PostgreSQL, SQL, relational databases, ORM, REST APIs, service integrations" }
+  - { label: "Testing", value: "Postman, unit and API testing, debugging, log analysis" }
+  - { label: "Infrastructure", value: "Linux, command line, Docker, deployment, AWS, Vercel" }
+  - { label: "Tools", value: "Git, Bitbucket, Trello, Figma, VS Code, IntelliJ IDEA" }
+  - { label: "AI tools", value: "Claude, ChatGPT, OpenAI Codex, GitHub Copilot, OpenCode" }
+  - { label: "Operating systems", value: "Linux, Windows, macOS" }
+languages:
+  - "Czech — native"
+  - "English — advanced writing, good spoken proficiency"
+  - "French — beginner"
+personalSkills: "Analytical thinking · Independent work · Communication · Fast learning · Adaptability · Team collaboration · Problem-solving · Attention to quality"
+interests:
+  - "Music, guitar and singing"
+  - "Exploring photography and filmmaking"
+  - "Indoor and outdoor sports climbing"
+  - "Nature"

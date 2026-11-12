@@ -1,0 +1,39 @@
+# Photographs; `order` sets the display order. `id` is the anchor on /photographs/ (#id) and the value used by
+# now.json → lastPhoto. Titles and alt text are ported verbatim from the Jekyll site.
+# `takenAt` comes from the original file's EXIF data.
+- id: under-an-autumn-sky
+  order: 1
+  title: Under an Autumn Sky
+  alt: Golden autumn leaves frame a deep blue evening sky above a residential street.
+  image: ../assets/photos/under-an-autumn-sky.jpg
+  takenAt: 2026-10-16T17:13:04+02:00
+- id: the-everyday-passage
+  order: 2
+  title: The Everyday Passage
+  alt: A covered walkway opens onto a sunlit city street, with a few people heading home.
+  image: ../assets/photos/the-everyday-passage.jpg
+  takenAt: 2026-10-16T17:12:09+02:00
+- id: the-walk-home
+  order: 3
+  title: The Walk Home
+  alt: A person walks across a grassy path toward apartment buildings beneath a pink evening sky.
+  image: ../assets/photos/the-walk-home.jpg
+  takenAt: 2026-10-16T16:44:36+02:00
+- id: light-through-the-blinds
+  order: 4
+  title: Light Through the Blinds
+  alt: Soft violet and pink light falls through a narrow opening in closed window blinds.
+  image: ../assets/photos/light-through-the-blinds.jpg
+  takenAt: 2026-10-22T15:53:15+02:00
+- id: a-familiar-shape
+  order: 5
+  title: A Familiar Shape
+  alt: A close-up black-and-white photograph of a Coca-Cola bottle against a plain background.
+  image: ../assets/photos/a-familiar-shape.jpg
+  takenAt: 2026-10-13T13:26:19+02:00
+- id: amber-after-dark
+  order: 6
+  title: Amber After Dark
+  alt: Golden streetlights illuminate the branches and leaves of a tree at night.
+  image: ../assets/photos/amber-after-dark.jpg
+  takenAt: 2026-10-29T22:04:13+01:00
